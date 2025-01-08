@@ -107,6 +107,7 @@ if status is-interactive
 	end
 
 	############# Aliases & Abbreviations ############# 
+	alias vim='nvim'
 	alias grep='grep --color'
 
 	# Install date
