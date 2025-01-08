@@ -1,6 +1,6 @@
--- from: https://yazi-rs.github.io/docs/tips#smart-enter
-
 --- @sync entry
+
+-- from: https://yazi-rs.github.io/docs/tips#smart-enter
 return {
 	entry = function()
 		local h = cx.active.current.hovered
