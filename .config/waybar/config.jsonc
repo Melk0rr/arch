@@ -14,7 +14,7 @@
 
 // positions generated based on config.ctl //
 
-	"modules-left": ["custom/padd","custom/l_end","custom/launcher","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/l_end","hyprland/window","custom/r_end","group/mediagroup","custom/padd"],
+	"modules-left": ["custom/padd","custom/launcher","custom/l_end","hyprland/workspaces","custom/r_end","custom/l_end","hyprland/window","custom/r_end","group/mediagroup","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd"],
 	"modules-right": ["custom/padd","group/cpugroup","custom/l_end","custom/gpuinfo","custom/r_end","custom/l_end","memory","custom/r_end","group/soundgroup","custom/l_end","tray","battery","custom/r_end","custom/l_end","custom/updates","custom/notifications","custom/r_end","custom/padd"],
 
@@ -25,6 +25,7 @@
     "format": "",
     "rotate": 0,
     "on-click": "pkill -x rofi || rofilaunch.sh d",
+    "on-click-right": "logoutlaunch.sh 2",
     "tooltip": false
   },    "hyprland/workspaces": {
         "disable-scroll": true,

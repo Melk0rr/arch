@@ -199,10 +199,17 @@ tooltip label {
     color: @wb-act-fg;
 }
 
-#mediagroup, #soundgroup, #cpugroup {
+#custom-launcher, #mediagroup, #soundgroup, #cpugroup {
     border-radius: 30px;
     margin-right: 4px;
     margin-left: 4px;
+}
+
+#custom-launcher {
+    padding-left: 15px;
+    padding-right: 20px;
+    color: @main-bg;
+    background-color: @alt-fg;
 }
 
 #mediagroup *, #soundgroup *, #cpugroup * {
