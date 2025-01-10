@@ -1,0 +1,20 @@
+$HOME/.config/simplex/themes.yaml
+themes:
+- themeId: "1dc65436-4add-4877-86dd-f09c0461f037"
+  base: "SIMPLEX"
+- themeId: "03837d13-3c93-4cea-ba4c-b67751248c51"
+  base: "DARK"
+  colors:
+    accent: "#ff<wallbash_1xa8>"
+    accentVariant: "#ff<wallbash_1xa4>"
+    secondary: "ff#<wallbash_3xa8>"
+    secondaryVariant: "#ff<wallbash_3xa4>"
+    background: "#ff<wallbash_pry1>"
+    menus: "#ff<wallbash_1xa2>"
+    title: "#ff<wallbash_1xa6>"
+    accentVariant2: "#ff<wallbash_1xa3>"
+    sentMessage: "#ff<wallbash_2xa1>"
+    sentReply: "#ff<wallbash_2xa2>"
+    receivedMessage: "#ff<wallbash_4xa1>"
+    receivedReply: "#ff<wallbash_4xa2>"
+
