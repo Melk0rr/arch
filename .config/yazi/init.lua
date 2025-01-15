@@ -1,4 +1,5 @@
--- require("git"):setup()
+require("git"):setup()
+require("full-border"):setup()
 
 -- Add the user and group in the status line (from: https://yazi-rs.github.io/docs/tips#user-group-in-status)
 Status:children_add(function()
