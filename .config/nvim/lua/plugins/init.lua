@@ -1,3 +1,3 @@
 return {
-  require 'plugins.telescope',
+  require("plugins.telescope"),
 }
