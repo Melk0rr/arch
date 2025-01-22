@@ -1,0 +1,12 @@
+$HOME/.config/nvim/lua/user/plugins/base16.lua
+return {
+  "RRethy/base16-nvim",
+  config = function()
+    require("base16-colorscheme").setup({
+      base00 = '#<wallbash_pry1>', base01 = '#<wallbash_4xa9>', base02 = '#<wallbash_2xa9>', base03 = '#<wallbash_3xa9>',
+      base04 = '#<wallbash_1xa7>', base05 = '#<wallbash_2xa7>', base06 = '#<wallbash_3xa7>', base07 = '#<wallbash_4xa9>',
+      base08 = '#<wallbash_1xa2>', base09 = '#<wallbash_4xa8>', base0A = '#<wallbash_2xa8>', base0B = '#<wallbash_3xa8>',
+      base0C = '#<wallbash_1xa7>', base0D = '#<wallbash_2xa7>', base0E = '#<wallbash_3xa7>', base0F = '#<wallbash_4xa8>',
+    })
+  end
+}
