@@ -10,7 +10,7 @@ return {
           disabled_filetypes = { "alpha" },
         },
         sections = {
-          lualine_b = { "branch", "diagnostics" },
+          lualine_b = { "branch", "diff" },
           lualine_c = {{ "filename", path = 1 }}
         },
       }
