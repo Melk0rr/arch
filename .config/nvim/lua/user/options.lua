@@ -9,7 +9,7 @@ vim.opt.smartindent = true
 vim.opt.smartcase = true
 
 -- Line
--- vim.opt.cursorline = true
+vim.opt.cursorline = true
 vim.opt.number = true 			          -- line number
 vim.opt.fillchars = { eob = ' ' }
 
@@ -34,8 +34,8 @@ vim.opt.ch = 0
 vim.g.terminal_emulator = "kitty"
 
 -- Term colors
-vim.cmd 'colorscheme vim' 		        -- color scheme
---vim.cmd 'set background=dark'
+vim.cmd "colorscheme vim" 		        -- color scheme
+--vim.cmd "set background=dark"
 vim.opt.termguicolors = true
 
 -- Miscellaneous
@@ -43,3 +43,13 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.opt.pumheight = 40
 vim.lsp.inlay_hint.enable(true)
+
+-- Style customization
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "CursorLine", { bg="NONE", underline=true, cterm={ underline=true } })
+    --vim.api.nvim_set_hl(0, "LineNr", { bg="NONE", bold=false })
+    vim.api.nvim_set_hl(0, "CursorLineNr", { bg="NONE", bold=true, cterm={ bold=true } })
+    vim.api.nvim_set_hl(0, "IlluminatedWordRead", { standout=true })
+  end,
+})
