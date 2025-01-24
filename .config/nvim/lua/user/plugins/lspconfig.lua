@@ -4,15 +4,17 @@ return {
     local lspconfig = require("lspconfig")
     local on_attach = function(_, bufnr)
       local opts = { noremap = true, silent = true }
-      local map = function(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-      map('n', "<leader>[", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-      map('n', "<leader>]", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-      map('n', "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-      map('n', "gk", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-      map('n', "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-      map('n', "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-      map('n', "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-      map('n', "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+      local map = vim.keymap.set
+      map('n', "<leader>[", vim.lsp.buf.declaration, opts)
+      map('n', "<leader>]", vim.lsp.buf.definition, opts)
+      map('n', "K", vim.lsp.buf.hover, opts)
+      map('n', "gk", vim.lsp.buf.signature_help, opts)
+      map('n', "gd", vim.lsp.buf.definition, opts)
+      map('n', "[d", vim.diagnostic.goto_prev, opts)
+      map('n', "]d", vim.diagnostic.goto_next, opts)
+      map('n', "<leader>rn", vim.lsp.buf.rename, opts)
+      map('n', "<leader>ca", vim.lsp.buf.code_action, opts)
+      map('n', "<leader>gf", vim.lsp.buf.format, opts)
       map('n', "<leader>q", "<cmd>Telescope diagnostics<CR>", opts)
       map('n', "<leader>p", "<cmd>Telescope lsp_workspace_symbols<CR>", opts)
     end
@@ -35,11 +37,11 @@ return {
         pylsp = {
           plugins = {
             flake8 = {
-              ignore = { "E111", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
+              ignore = { "E111", "E114", "E121", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
               maxLineLength = 100,
             },
             pycodestyle = {
-              ignore = { "E111", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
+              ignore = { "E111", "E114", "E121", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
               maxLineLength = 100,
             }
           }
