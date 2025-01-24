@@ -15,8 +15,8 @@ return {
   require("user.plugins.lualine"),
   require("user.plugins.mason"),
   require("user.plugins.neotree"),
+  require("user.plugins.none-ls"),
   require("user.plugins.telescope"),
-  require("user.plugins.telescope-project"),
   require("user.plugins.toggleterm"),
   require("user.plugins.treesitter"),
 }
