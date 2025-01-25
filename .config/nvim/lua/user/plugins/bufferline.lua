@@ -19,7 +19,7 @@ return {
       return #result > 0 and result or ''
     end
 
-    require("bufferline").setup {
+    require("bufferline").setup({
       highlights = {
         background = {
           color = "#ff0000",
@@ -30,6 +30,8 @@ return {
         },
       },
       options = {
+        close_command = "Bdelete! %d",
+        close_icon = "",
         themable = true,
         auto_toggle_bufferline = true,
         mode = "buffers", -- set to "tabs" to only show tabpages instead
@@ -44,10 +46,10 @@ return {
             padding = 1,
           },
         },
-        always_show_bufferline = false,
+        always_show_bufferline = true,
         sort_by = "id",
         debug = { logging = false },
       },
-    }
+    })
   end,
 }
