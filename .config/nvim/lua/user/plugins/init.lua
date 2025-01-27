@@ -1,5 +1,5 @@
 return {
-  require("user.plugins.alpha"),
+  -- require("user.plugins.alpha"),
   require("user.plugins.autopairs"),
   require("user.plugins.base16"),
   require("user.plugins.bufferline"),
@@ -8,7 +8,7 @@ return {
   require("user.plugins.comment"),
   require("user.plugins.csvview"),
   require("user.plugins.illuminate"),
-  require("user.plugins.indent-blankline"),
+  -- require("user.plugins.indent-blankline"),
   require("user.plugins.inlay-hint"),
   require("user.plugins.lspconfig"),
   require("user.plugins.lspsignature"),
@@ -16,6 +16,7 @@ return {
   require("user.plugins.mason"),
   require("user.plugins.neotree"),
   require("user.plugins.none-ls"),
+  require("user.plugins.snacks"),
   require("user.plugins.telescope"),
   require("user.plugins.toggleterm"),
   require("user.plugins.treesitter"),
