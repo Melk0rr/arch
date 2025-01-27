@@ -38,6 +38,7 @@ map('v', '<A-k>', ":m '<-2<cr>gv=gv", opts)
 local telescope = require 'telescope.builtin'
 map('n', '<C-p>', telescope.find_files, opts)
 map('n', '<leader>fg', telescope.live_grep, opts)
+map('n', '<leader>ls', telescope.lsp_document_symbols, opts)
 
 -- neo-tree
 map('n', '<leader>e', '<cmd>Neotree toggle<cr>', opts)
