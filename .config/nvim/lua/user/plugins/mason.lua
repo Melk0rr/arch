@@ -11,7 +11,6 @@ return {
       "hyprls",
       "jsonls",
       "lua_ls",
-      "stylua",
       "markdown_oxide",
       "pylsp",
       "pyright",
