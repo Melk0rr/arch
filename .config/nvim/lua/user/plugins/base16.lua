@@ -22,6 +22,7 @@ return {
 
     local border = require("base16-colorscheme").colors.base01
     local title = require("base16-colorscheme").colors.base0A
+    local indscope = require("base16-colorscheme").colors.base07
     vim.api.nvim_create_autocmd("BufEnter", {
       callback = function()
         -- Telescope customization
@@ -32,6 +33,9 @@ return {
         vim.api.nvim_set_hl(0, "TelescopePromptTitle", { bg = "NONE", fg = title })
         vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { bg = "NONE", fg = title })
         vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { bg = "NONE", fg = title })
+
+        -- Snack indent scope
+        vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = indscope })
       end,
     })
   end,
