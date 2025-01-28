@@ -24,6 +24,17 @@ return {
     -- Lazygit
     lazygit = {
       configure = true,
+      config = {
+        gui = {
+
+        },
+        os = {
+          disableStartupPopups = true,
+        }
+      },
+      win = {
+        height = 0,
+      },
     },
 
     -- Notifier
@@ -31,9 +42,6 @@ return {
 
     -- Quickfile
     quickfile = { enabled = true },
-
-    -- Status column
-    statuscolumn = { enabled = true },
 
     -- Scroll
     scroll = { enable = true },
