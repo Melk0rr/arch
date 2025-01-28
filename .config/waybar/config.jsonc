@@ -92,9 +92,9 @@
             "mpv": "󰝚"
         },
         "status-icons": {
-            "paused": "▶"
+            "paused": "▶",
         },
-        // "ignored-players": ["firefox"]
+        // "ignored-players": [""],
         "max-length": 50,
         "dynamic-length": 50,
         "dynamic-order": ["artist", "title", "album", "length", "position"],

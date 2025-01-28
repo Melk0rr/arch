@@ -18,6 +18,6 @@ return {
   require("user.plugins.none-ls"),
   require("user.plugins.snacks"),
   require("user.plugins.telescope"),
-  require("user.plugins.toggleterm"),
+  -- require("user.plugins.toggleterm"),
   require("user.plugins.treesitter"),
 }

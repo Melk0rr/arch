@@ -15,8 +15,9 @@ return {
       map('n', "<leader>rn", vim.lsp.buf.rename, opts)
       map('n', "<leader>ca", vim.lsp.buf.code_action, opts)
       map('n', "<leader>gf", vim.lsp.buf.format, opts)
-      map('n', "<leader>q", "<cmd>Telescope diagnostics<CR>", opts)
-      map('n', "<leader>p", "<cmd>Telescope lsp_workspace_symbols<CR>", opts)
+      map('n', "<leader>td", "<cmd>Telescope diagnostics<CR>", opts)
+      map('n', "<leader>ws", "<cmd>Telescope lsp_workspace_symbols<CR>", opts)
+      map('n', "<leader>ds", "<cmd>Telescope lsp_document_symbols<CR>", opts)
     end
 
     lspconfig.bashls.setup { on_attach = on_attach }                                   -- Bash
@@ -39,10 +40,12 @@ return {
             flake8 = {
               ignore = { "E111", "E114", "E121", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
               maxLineLength = 100,
+              indentSize = 2,
             },
             pycodestyle = {
               ignore = { "E111", "E114", "E121", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
               maxLineLength = 100,
+              indentSize = 2,
             }
           }
         }

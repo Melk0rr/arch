@@ -39,6 +39,9 @@ local telescope = require 'telescope.builtin'
 map('n', '<C-p>', telescope.find_files, opts)
 map('n', '<leader>fg', telescope.live_grep, opts)
 map('n', '<leader>ls', telescope.lsp_document_symbols, opts)
+map('n', '<leader>gB', telescope.git_branches, opts)
+map('n', '<leader>gC', telescope.git_commits, opts)
+map('n', '<leader>gS', telescope.git_status, opts)
 
 -- neo-tree
 map('n', '<leader>e', '<cmd>Neotree toggle<cr>', opts)

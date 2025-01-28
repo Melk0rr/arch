@@ -1,11 +1,14 @@
 [Colors:View]
-BackgroundNormal=#192A53
+BackgroundNormal=#2E2B2C
 
 [General]
 TerminalApplication=kitty
 
 [Icons]
-Theme=cyberpunk-technotronic-icon-theme
+Theme=Tela-circle-purple-dark
+
+[KDE]
+windgetStyke=kvantum
 
 [UiSettings]
 ColorScheme=*
