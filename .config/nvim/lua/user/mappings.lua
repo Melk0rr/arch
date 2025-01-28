@@ -33,12 +33,15 @@ map('n', '<A-k>', ':m .-2<cr>==', opts)
 map('v', '<A-j>', ":m '>+1<cr>gv=gv", opts)
 map('v', '<A-k>', ":m '<-2<cr>gv=gv", opts)
 
+-- Search
+map('n', '<leader>cs', '<cmd>noh<cr>', opts)                    -- Cancel search
+
 -- Plugin-specific
 -- telescope
 local telescope = require 'telescope.builtin'
-map('n', '<C-p>', telescope.find_files, opts)
+map('n', '<leader>ff', telescope.find_files, opts)
+map('n', '<leader>fG', telescope.grep_string, opts)
 map('n', '<leader>fg', telescope.live_grep, opts)
-map('n', '<leader>ls', telescope.lsp_document_symbols, opts)
 map('n', '<leader>gB', telescope.git_branches, opts)
 map('n', '<leader>gC', telescope.git_commits, opts)
 map('n', '<leader>gS', telescope.git_status, opts)
