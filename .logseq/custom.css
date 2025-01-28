@@ -1,0 +1,117 @@
+:root {
+  --cp-primary: #8F5768 !important;
+  --cp-dark: #4B647D !important;
+  --cp-darker: #3A526B !important;
+  --cp-darkest: #0C0D0E !important;
+  --cp-lighter: #9AC0E6 !important;
+  --cp-lightest: #AACDF0 !important;
+  --cp-gray: #293D52 !important;
+  --cp-lightgray: #3A526B !important;
+  --cp-red: #FFCCDB !important;
+  --cp-darkred: #F0AABF !important;
+  --cp-beige: #C27A90 !important;
+  --cp-orange: #9E6677 !important;
+  --cp-cyan: #9AB9E6 !important;
+  --cp-blue: #AACDF0 !important;
+  --cp-darkblue: #9AC0E6 !important;
+  --cp-magenta: #9AA9E6 !important;
+  --cp-green: #AAB8F0 !important;
+  --cp-yellow: #AAC7F0 !important;
+  --cp-white: #F0AABF !important;
+
+  --lx-accent-01: #4B647D !important;
+  --lx-accent-02: #57738F !important;
+  --lx-accent-03: #6584A3 !important;
+  --lx-accent-04: #4B557D !important;
+  --lx-accent-05: #57628F !important;
+  --lx-accent-06: #6572A3 !important;
+  --lx-accent-07: #576E8F !important;
+  --lx-accent-08: #576E8F !important;
+  --lx-accent-09: #657FA3 !important;
+  --lx-accent-10: #7D4B5A !important;
+  --lx-accent-11: #8F5768 !important;
+  --lx-accent-12: #A36578 !important;
+  
+
+  --ls-border-color: #522935 !important;
+  --ls-secondary-border-color: #293A52 !important;
+
+  --ls-block-bullet-active-color: #F0AABF !important;
+  --ls-block-bullet-threading-active-color-overwrite: #F0AABF !important;
+
+  --ct-h1-color: 1px solid #8F5768 !important;
+  --ct-h2-color: 1px solid #8F5768 !important;
+  --ct-h3-color: 1px solid #8F5768 !important;
+  --ct-h4-color: 1px solid #8F5768 !important;
+  --ct-h5-color: 1px solid #8F5768 !important;
+  --ct-bold-color: var(--cp-red) !important;
+}
+
+html * {
+  border-color: var(--ls-border-color);
+}
+
+button, a {
+  box-shadow: none !important;
+}
+
+.dark-theme, html[data-theme=dark] {
+
+  --ct-bold-color: #7A98C2 !important;
+  --ct-right-sidebar-bg-color: #0C0D0E !important;
+
+  --ls-border-color: #522935 !important;
+  --ls-secondary-border-color: #293A52 !important;
+
+  --ls-primary-background-color: #0C0D0E !important;
+  --ls-secondary-background-color: #2C3040 !important;
+  --ls-tertiary-background-color: #495C77 !important;
+  --ls-quaternary-background-color: #9E6677 !important;
+
+  --rx-logseq-01: #4B647D !important;
+  --rx-logseq-02: #57738F !important;
+  --rx-logseq-03: #6584A3 !important;
+  --rx-logseq-04: #4B557D !important;
+  --rx-logseq-05: #57628F !important;
+  --rx-logseq-06: #6572A3 !important;
+  --rx-logseq-07: #576E8F !important;
+  --rx-logseq-08: #576E8F !important;
+  --rx-logseq-09: #657FA3 !important;
+  --rx-logseq-10: #7D4B5A !important;
+  --rx-logseq-11: #8F5768 !important;
+  --rx-logseq-12: #A36578 !important;
+}
+
+.form-input {
+  background-color: var(--ls-tertiary-background-color);
+}
+
+.form-input:focus {
+  box-shadow: 0 0 0 2px var(--ls-border-color);
+}
+
+.absolute-modal[data-modal-name] {
+  background-color: var(--ls-secondary-background-color);
+}
+
+html[data-theme=dark] .absolute-modal {
+  border: 1px solid var(--ls-border-color);
+}
+
+html[data-theme=dark] .absolute-modal button,
+.ui__button {
+  background-color: var(--ls-tertiary-background-color) !important;
+}
+
+html[data-theme=dark] .absolute-modal button:hover,
+.ui__button:hover {
+  background-color: var(--ls-secondary-background-color) !important;
+}
+
+.dropdown-wrapper, .menu-links-outer, .menu-links-wrapper {
+  background-color: #293D52;
+}
+
+.block-children-left-border {
+  background-color: #F0AABF80;
+}
