@@ -3,6 +3,7 @@ return {
   event = 'VeryLazy',
   opts = {
     bind = true,
+    floating_window_above_cur_line = false,
     handler_opts = {
       border = "rounded"
     }
