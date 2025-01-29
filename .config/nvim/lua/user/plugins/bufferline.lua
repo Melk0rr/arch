@@ -23,13 +23,13 @@ return {
 			options = {
 				highlights = {
 					background = {
-						color = "#ff0000",
 						italic = true,
 					},
 					buffer_selected = {
 						bold = true,
 					},
 				},
+				indicator = { style = "underline" },
 				close_command = "Bdelete! %d",
 				close_icon = "",
 				themable = true,
@@ -40,10 +40,10 @@ return {
 				diagnostics_indicator = diagnostics_indicator,
 				offsets = {
 					{
-						filetype = "NvimTree",
-						text = "Explorer",
-						highlight = "PanelHeading",
-						padding = 1,
+						filetype = "neo-tree",
+						text = "File Explorer",
+						separator = true,
+						highlight = "Directory",
 					},
 				},
 				always_show_bufferline = true,
