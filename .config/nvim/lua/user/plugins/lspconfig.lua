@@ -3,21 +3,22 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
     local on_attach = function(_, bufnr)
-      local opts = { noremap = true, silent = true }
+      local opts = function(desc)
+        return { noremap = true, silent = true, desc = desc }
+      end
       local map = vim.keymap.set
-      map('n', "<leader>[", vim.lsp.buf.declaration, opts)
-      map('n', "<leader>]", vim.lsp.buf.definition, opts)
-      map('n', "K", vim.lsp.buf.hover, opts)
-      map('n', "gk", vim.lsp.buf.signature_help, opts)
-      map('n', "gd", vim.lsp.buf.definition, opts)
-      map('n', "[d", vim.diagnostic.goto_prev, opts)
-      map('n', "]d", vim.diagnostic.goto_next, opts)
-      map('n', "<leader>rn", vim.lsp.buf.rename, opts)
-      map('n', "<leader>ca", vim.lsp.buf.code_action, opts)
-      map('n', "<leader>gf", vim.lsp.buf.format, opts)
-      map('n', "<leader>td", "<cmd>Telescope diagnostics<CR>", opts)
-      map('n', "<leader>ws", "<cmd>Telescope lsp_workspace_symbols<CR>", opts)
-      map('n', "<leader>ds", "<cmd>Telescope lsp_document_symbols<CR>", opts)
+      map('n', "<leader>li", vim.lsp.buf.declaration, opts("LSP declaration"))
+      map('n', "<leader>lI", vim.lsp.buf.definition, opts("LSP definition"))
+      map('n', "<leader>lr", vim.lsp.buf.rename, opts("Rename LSP reference"))
+      map('n', "<leader>la", vim.lsp.buf.code_action, opts("LSP code action"))
+      map('n', "<leader>lf", vim.lsp.buf.format, opts("LSP format"))
+      map('n', "<leader>lh", vim.lsp.buf.hover, opts("LSP hover info"))
+      map('n', "<leader>lH", vim.lsp.buf.signature_help, opts("LSP signature help"))
+      map('n', "<leader>lk", vim.diagnostic.goto_prev, opts("Previous LSP diagnostic"))
+      map('n', "<leader>lj", vim.diagnostic.goto_next, opts("Next LSP diagnostic"))
+      map('n', "<leader>ld", "<cmd>Telescope diagnostics<CR>", opts("Telescope LSP diagnostics"))
+      map('n', "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>", opts("Telescope LSP document symbols"))
+      map('n', "<leader>lS", "<cmd>Telescope lsp_workspace_symbols<CR>", opts("Telescope LSP workspace symbols"))
     end
 
     lspconfig.bashls.setup { on_attach = on_attach }                                   -- Bash
