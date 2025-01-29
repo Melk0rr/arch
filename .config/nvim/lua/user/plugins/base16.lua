@@ -1,7 +1,8 @@
 return {
   "RRethy/base16-nvim",
   config = function()
-    require("base16-colorscheme").setup({
+    local theme = require("base16-colorscheme")
+    theme.setup({
       base00 = "#0C0D0E",
       base01 = "#7D4B5A",
       base02 = "#4B557D",
@@ -18,25 +19,6 @@ return {
       base0D = "#AAB8F0",
       base0E = "#AAC7F0",
       base0F = "#F0AABF",
-    })
-
-    local border = require("base16-colorscheme").colors.base01
-    local title = require("base16-colorscheme").colors.base0A
-    local indscope = require("base16-colorscheme").colors.base07
-    vim.api.nvim_create_autocmd("BufEnter", {
-      callback = function()
-        -- Telescope customization
-        vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "NONE", fg = border })
-        vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "NONE", fg = border })
-        vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { bg = "NONE" })
-        vim.api.nvim_set_hl(0, "TelescopePromptTitle", { bg = "NONE", fg = title })
-        vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { bg = "NONE", fg = title })
-        vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { bg = "NONE", fg = title })
-
-        -- Snack indent scope
-        vim.api.nvim_set_hl(0, "SnacksIndentScope", { fg = indscope })
-      end,
     })
   end,
 }
