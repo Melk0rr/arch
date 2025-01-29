@@ -57,10 +57,11 @@ return {
     words = { enabled = true },
   },
   keys = {
+    { "<leader>a" , function() Snacks.dashboard() end, desc = "Snacks dashboard" },
     { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
-    { "<c-t>",      function() Snacks.terminal() end, desc = "Toggle Terminal", mode = { "n", "t" } },
+    { "<leader>tn", function() Snacks.terminal() end, desc = "Toggle Terminal", mode = { "n", "t" } },
     { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
     { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
   },
