@@ -1,50 +1,58 @@
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
+local opts = function(desc)
+  return { noremap = true, silent = true, desc = desc }
+end
 
 -- Common
-map('', 'Y', 'y$', opts)                                      -- 'Y' to yank the whole line
-map('n', '<leader;', 'mqA;<esc>`q', opts)                     -- put semicolon at the end of the line
+map('', 'Y', 'y$', opts("Yank whole line"))
+map('n', '<leader;', 'mqA;<esc>`q', opts("Semicolon at end of line"))
 
 -- Press jk fast to exit insert mode
-map('i', 'jk', '<ESC>', opts)
-map('i', 'kj', '<ESC>', opts)
+map('i', 'jk', '<ESC>', opts("jk to exit insert mode"))
+map('i', 'kj', '<ESC>', opts("kj to exit insert mode"))
 
 -- Window navigation
-map('n', '<C-h>', '<C-w>h', opts)
-map('n', '<C-j>', '<C-w>j', opts)
-map('n', '<C-k>', '<C-w>k', opts)
-map('n', '<C-l>', '<C-w>l', opts)
-map('t', '<C-h>', [[<C-\><C-n><C-w>h]], opts)
-map('t', '<C-j>', [[<C-\><C-n><C-w>j]], opts)
-map('t', '<C-k>', [[<C-\><C-n><C-w>k]], opts)
-map('t', '<C-l>', [[<C-\><C-n><C-w>l]], opts)
+map('n', '<C-h>', '<C-w>h', opts("Go to left window"))
+map('n', '<C-j>', '<C-w>j', opts("Go to lower window"))
+map('n', '<C-k>', '<C-w>k', opts("Go to upper window"))
+map('n', '<C-l>', '<C-w>l', opts("Go to right window"))
+map('t', '<C-h>', [[<C-\><C-n><C-w>h]], opts("Go to left terminal"))
+map('t', '<C-j>', [[<C-\><C-n><C-w>j]], opts("Go to lower terminal"))
+map('t', '<C-k>', [[<C-\><C-n><C-w>k]], opts("Go to upper terminal"))
+map('t', '<C-l>', [[<C-\><C-n><C-w>l]], opts("Go to right terminal"))
 
 -- Buffer navigation
-map('n', '<Tab>', '<cmd>bnext<cr>', opts)
-map('n', '<S-Tab>', '<cmd>bprevious<cr>', opts)
+map('n', '<Tab>', '<cmd>bnext<cr>', opts("Next buffer"))
+map('n', '<S-Tab>', '<cmd>bprevious<cr>', opts("Previous buffer"))
 
 -- Stay in indent mode
-map('v', '<', '<gv^', opts)
-map('v', '>', '>gv^', opts)
+map('v', '<', '<gv^', opts("Unindent"))
+map('v', '>', '>gv^', opts("Indent"))
 
 -- Move lines
-map('n', '<A-j>', ':m .+1<cr>==', opts)
-map('n', '<A-k>', ':m .-2<cr>==', opts)
-map('v', '<A-j>', ":m '>+1<cr>gv=gv", opts)
-map('v', '<A-k>', ":m '<-2<cr>gv=gv", opts)
+map('n', '<A-j>', ':m .+1<cr>==', opts("Move line down"))
+map('n', '<A-k>', ':m .-2<cr>==', opts("Move line up"))
+map('v', '<A-j>', ":m '>+1<cr>gv=gv", opts("Move selection down"))
+map('v', '<A-k>', ":m '<-2<cr>gv=gv", opts("Move selection up"))
 
 -- Search
-map('n', '<leader>cs', '<cmd>noh<cr>', opts)                    -- Cancel search
+map('n', '<leader>h', '<cmd>noh<cr>', opts("Cancel search highlight"))
 
 -- Plugin-specific
--- telescope
-local telescope = require 'telescope.builtin'
-map('n', '<leader>ff', telescope.find_files, opts)
-map('n', '<leader>fG', telescope.grep_string, opts)
-map('n', '<leader>fg', telescope.live_grep, opts)
-map('n', '<leader>gB', telescope.git_branches, opts)
-map('n', '<leader>gC', telescope.git_commits, opts)
-map('n', '<leader>gS', telescope.git_status, opts)
+-- search
+local telescope = require("telescope.builtin")
+map('n', '<leader>ff', telescope.find_files, opts("Telescope find files"))
+map('n', '<leader>ff', telescope.oldfiles, opts("Telescope find recent files"))
+map('n', '<leader>fk', telescope.keymaps, opts("Telescope find keymaps"))
+map('n', '<leader>fC', telescope.commands, opts("Telescope find commands"))
+map('n', '<leader>fg', telescope.grep_string, opts("Telescope grep string"))
+map('n', '<leader>fG', telescope.live_grep, opts("Telescope live grep"))
+map('n', '<leader>fP', '<cmd>Telescope projects<cr>', opts("Telescope projects"))
+
+-- git
+map('n', '<leader>gB', telescope.git_branches, opts("Telescope git branches"))
+map('n', '<leader>gc', telescope.git_commits, opts("Telescope git commits"))
+map('n', '<leader>gs', telescope.git_status, opts("Telescope git status"))
 
 -- neo-tree
-map('n', '<leader>e', '<cmd>Neotree toggle<cr>', opts)
+map('n', '<leader>e', '<cmd>Neotree toggle<cr>', opts("Toggle neo tree"))
