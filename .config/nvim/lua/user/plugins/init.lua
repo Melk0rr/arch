@@ -20,4 +20,5 @@ return {
   require("user.plugins.telescope"),
   require("user.plugins.todo-comments"),
   require("user.plugins.treesitter"),
+  require("user.plugins.whichkey"),
 }
