@@ -20,22 +20,6 @@ return {
       base0E = '#<wallbash_3xa8>',
       base0F = '#<wallbash_4xa8>',
     })
-    
-    -- Color usage
-    local border = require("base16-colorscheme").colors.base01
-    local title = require("base16-colorscheme").colors.base0A
-    vim.api.nvim_create_autocmd("BufEnter", {
-      callback = function()
-        -- Telescope customization
-        vim.api.nvim_set_hl(0, "TelescopeBorder", { bg="NONE", fg=border })
-        vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg="NONE", fg=border })
-        vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg="NONE" })
-        vim.api.nvim_set_hl(0, "TelescopePromptPrefix", { bg="NONE" })
-        vim.api.nvim_set_hl(0, "TelescopePromptTitle", { bg="NONE", fg=title })
-        vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { bg="NONE", fg=title })
-        vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { bg="NONE", fg=title })
-      end
-    })
   end
 }
 
