@@ -6,6 +6,8 @@ end
 -- Common
 map('', 'Y', 'y$', opts("Yank whole line"))
 map('n', '<leader;', 'mqA;<esc>`q', opts("Semicolon at end of line"))
+map('n', '<leader>h', '<cmd>noh<cr>', opts("No search highlight"))
+map('n', '<leader>zz', '<cmd>wqa!<cr>', opts("Save and quit"))
 
 -- Press jk fast to exit insert mode
 map('i', 'jk', '<ESC>', opts("jk to exit insert mode"))
@@ -35,14 +37,11 @@ map('n', '<A-k>', ':m .-2<cr>==', opts("Move line up"))
 map('v', '<A-j>', ":m '>+1<cr>gv=gv", opts("Move selection down"))
 map('v', '<A-k>', ":m '<-2<cr>gv=gv", opts("Move selection up"))
 
--- Search
-map('n', '<leader>h', '<cmd>noh<cr>', opts("Cancel search highlight"))
-
 -- Plugin-specific
 -- search
 local telescope = require("telescope.builtin")
 map('n', '<leader>ff', telescope.find_files, opts("Telescope find files"))
-map('n', '<leader>ff', telescope.oldfiles, opts("Telescope find recent files"))
+map('n', '<leader>fr', telescope.oldfiles, opts("Telescope find recent files"))
 map('n', '<leader>fk', telescope.keymaps, opts("Telescope find keymaps"))
 map('n', '<leader>fC', telescope.commands, opts("Telescope find commands"))
 map('n', '<leader>fg', telescope.grep_string, opts("Telescope grep string"))
