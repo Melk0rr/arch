@@ -1,24 +1,24 @@
 return {
   "RRethy/base16-nvim",
   config = function()
-    local theme = require("base16-colorscheme")
-    theme.setup({
-      base00 = "#0C0D0E",
-      base01 = "#7D4B5A",
-      base02 = "#4B557D",
-      base03 = "#4B607D",
-      base04 = "#4B647D",
-      base05 = "#9AA9E6",
-      base06 = "#9AB9E6",
-      base07 = "#E69AB1",
-      base08 = "#6584A3",
-      base09 = "#F0AABF",
-      base0A = "#AAB8F0",
-      base0B = "#AAC7F0",
-      base0C = "#AACDF0",
-      base0D = "#AAB8F0",
-      base0E = "#AAC7F0",
-      base0F = "#F0AABF",
+    require("base16-colorscheme").setup({
+      base00 = '#2D282E',
+      base01 = '#614B7D',
+      base02 = '#7D524B',
+      base03 = '#7D4B5F',
+      base04 = '#754B7D',
+      base05 = '#E6A59A',
+      base06 = '#E69AB8',
+      base07 = '#BB9AE6',
+      base08 = '#9965A3',
+      base09 = '#C9AAF0',
+      base0A = '#F0B4AA',
+      base0B = '#F0AAC6',
+      base0C = '#E4AAF0',
+      base0D = '#F0B4AA',
+      base0E = '#F0AAC6',
+      base0F = '#C9AAF0',
     })
-  end,
+  end
 }
+

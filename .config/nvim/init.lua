@@ -3,7 +3,6 @@ package.path = package.path .. ';' .. home .. '/.config/nvim/lua?.lua'
 vim.opt.runtimepath:append(home .. '/.config/nvim/')
 
 require("user.options")
-require("user.autocmd")
 require("user.lazy")
-require("user.theme")
+require("user.autocmd")
 require("user.mappings")
