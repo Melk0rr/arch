@@ -21,40 +21,56 @@ return {
       map('n', "<leader>lS", "<cmd>Telescope lsp_workspace_symbols<CR>", opts("Telescope LSP workspace symbols"))
     end
 
-    lspconfig.bashls.setup { on_attach = on_attach }                                   -- Bash
-    lspconfig.fish_lsp.setup { on_attach = on_attach }                                 -- Fish
-    lspconfig.asm_lsp.setup { on_attach = on_attach }                                  -- Assembly
-    lspconfig.clangd.setup { on_attach = on_attach }                                   -- C/C++
-    lspconfig.rust_analyzer.setup { on_attach = on_attach }                            -- Rust
-    lspconfig.gopls.setup { on_attach = on_attach }                                    -- Go
-    lspconfig.ts_ls.setup { on_attach = on_attach }                                    -- Typescript/Javascript
-    -- lspconfig.nil_ls.setup { on_attach = on_attach }                                -- Nix
-    lspconfig.hyprls.setup { on_attach = on_attach }                                   -- Hyprlang
-    lspconfig.markdown_oxide.setup { on_attach = on_attach }                           -- Markdown
+    lspconfig.bashls.setup({ on_attach = on_attach })                                   -- Bash
+    lspconfig.fish_lsp.setup ({ on_attach = on_attach })                                 -- Fish
+    lspconfig.asm_lsp.setup ({ on_attach = on_attach })                                  -- Assembly
+    lspconfig.clangd.setup ({ on_attach = on_attach })                                   -- C/C++
+    lspconfig.rust_analyzer.setup ({ on_attach = on_attach })                            -- Rust
+    lspconfig.gopls.setup ({ on_attach = on_attach })                                    -- Go
+    lspconfig.ts_ls.setup ({ on_attach = on_attach })                                    -- Typescript/Javascript
+    -- lspconfig.nil_ls.setup ({ on_attach = on_attach })                                -- Nix
+    lspconfig.hyprls.setup ({ on_attach = on_attach })                                   -- Hyprlang
+    lspconfig.markdown_oxide.setup ({ on_attach = on_attach })                           -- Markdown
 
     -- Python
-    lspconfig.pylsp.setup {
+    lspconfig.ruff.setup({
+      on_attach = on_attach,
+      init_options = {
+        settings = {
+          configuration = "~/.config/ruff/ruff.toml",
+          lineLength = 100,
+          indentWidth = 2,
+          lint = {
+            enable = true,
+            ignore = { "E111", "E114", "E121", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
+          }
+        }
+      }
+    })
+    lspconfig.pylsp.setup({
       on_attach = on_attach,
       settings = {
         pylsp = {
           plugins = {
-            flake8 = {
-              ignore = { "E111", "E114", "E121", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
-              maxLineLength = 100,
-              indentSize = 2,
-            },
+            autopep8 = { enabled = false },
+            black = { enabled = false },
+            yapf = { enabled = false },
+            mccabe = { enabled = false },
+            pyflakes = { enabled = false },
+            flake8 = { enabled = false },
             pycodestyle = {
-              ignore = { "E111", "E114", "E121", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
-              maxLineLength = 100,
-              indentSize = 2,
-            }
+              enabled = false,
+              -- ignore = { "E111", "E114", "E121", "E202", "E203", "E501", "E221", "W503", "E241", "E402" },
+              -- maxLineLength = 100,
+              -- indentSize = 2,
+            },
           }
         }
       }
-    }
+    })
 
     -- Lua
-    lspconfig.lua_ls.setup {
+    lspconfig.lua_ls.setup({
       on_attach = on_attach,
       on_init = function(client)
         if client.workspace_folders then
@@ -103,7 +119,7 @@ return {
           },
         }
       },
-    }
+    })
 
     vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
       pattern = "*.wgsl",

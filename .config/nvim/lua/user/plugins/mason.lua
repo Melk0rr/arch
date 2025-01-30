@@ -13,7 +13,7 @@ return {
       "lua_ls",
       "markdown_oxide",
       "pylsp",
-      "pyright",
+      "ruff",
       "rust_analyzer",
     }
 
