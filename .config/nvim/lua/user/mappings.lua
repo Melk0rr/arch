@@ -8,6 +8,7 @@ map('', 'Y', 'y$', opts("Yank whole line"))
 map('n', '<leader;', 'mqA;<esc>`q', opts("Semicolon at end of line"))
 map('n', '<leader>h', '<cmd>noh<cr>', opts("No search highlight"))
 map('n', '<leader>zz', '<cmd>wqa!<cr>', opts("Save and quit"))
+map('n', '<C-a>', 'goVG', opts("Select all"))
 
 -- Press jk fast to exit insert mode
 map('i', 'jk', '<ESC>', opts("jk to exit insert mode"))
