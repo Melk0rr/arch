@@ -62,7 +62,7 @@ return {
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
     { "<leader>tn", function() Snacks.terminal() end, desc = "Toggle Terminal", mode = { "n", "t" } },
-    { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
-    { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+    { "<leader>ll",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next LSP Reference", mode = { "n", "t" } },
+    { "<leader>lL",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev LSP Reference", mode = { "n", "t" } },
   },
 }
