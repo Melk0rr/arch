@@ -48,6 +48,7 @@ map('n', '<leader>fC', telescope.commands, opts("Telescope find commands"))
 map('n', '<leader>fg', telescope.grep_string, opts("Telescope grep string"))
 map('n', '<leader>fG', telescope.live_grep, opts("Telescope live grep"))
 map('n', '<leader>fP', '<cmd>Telescope projects<cr>', opts("Telescope projects"))
+map('n', '<leader>ft', '<cmd>TodoTelescope<cr>', opts("Telescope todo comments"))
 
 -- git
 map('n', '<leader>gB', telescope.git_branches, opts("Telescope git branches"))
