@@ -11,6 +11,7 @@ return {
   require("user.plugins.lspconfig"),
   require("user.plugins.lspsignature"),
   require("user.plugins.lualine"),
+  require("user.plugins.markdown"),
   require("user.plugins.mason"),
   require("user.plugins.neotree"),
   require("user.plugins.noice"),
