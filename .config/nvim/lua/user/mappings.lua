@@ -57,3 +57,12 @@ map('n', '<leader>gs', telescope.git_status, opts("Telescope git status"))
 
 -- neo-tree
 map('n', '<leader>e', '<cmd>Neotree toggle<cr>', opts("Toggle neo tree"))
+
+-- Debugging
+map('n', '<leader>dc', "<cmd>lua require'dap'.continue()<cr>", opts("Debugger continue"))
+map('n', '<leader>dj', "<cmd>lua require'dap'.step_over()<cr>", opts("Debugger step over"))
+map('n', '<leader>dk', "<cmd>lua require'dap'.step_out()<cr>", opts("Debugger step out"))
+map('n', '<leader>dl', "<cmd>lua require'dap'.step_into()<cr>", opts("Debugger step into"))
+map('n', '<leader>db', "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts("Debugger toggle breakpoint"))
+map('n', '<leader>dr', "<cmd>lua require'dap'.repl_open()<cr>", opts("Debugger open repl"))
+map('n', '<leader>dt', "<cmd>lua vim.cmd('RustLsp testables')<cr>", opts("Debugger run rust tests"))
