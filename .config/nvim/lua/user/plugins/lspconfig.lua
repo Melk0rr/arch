@@ -25,7 +25,7 @@ return {
     lspconfig.fish_lsp.setup({ on_attach = on_attach })                                 -- Fish
     lspconfig.asm_lsp.setup({ on_attach = on_attach })                                  -- Assembly
     lspconfig.clangd.setup({ on_attach = on_attach })                                   -- C/C++
-    lspconfig.rust_analyzer.setup({ on_attach = on_attach })                            -- Rust
+    -- lspconfig.rust_analyzer.setup({ on_attach = on_attach })                            -- Rust
     lspconfig.gopls.setup({ on_attach = on_attach })                                    -- Go
     lspconfig.ts_ls.setup({ on_attach = on_attach })                                    -- Typescript/Javascript
     -- lspconfig.nil_ls.setup({ on_attach = on_attach })                                -- Nix
