@@ -57,12 +57,22 @@ return {
     words = { enabled = true },
   },
   keys = {
+    -- Dashboard
     { "<leader>a" , function() Snacks.dashboard() end, desc = "Snacks dashboard" },
+
+    -- Find
+    { "<leader>fp" , function() Snacks.picker.projects() end, desc = "Find projects" },
+
+    -- git
     { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
+
+    -- Terminal
     { "<leader>tn", function() Snacks.terminal() end, desc = "Toggle Terminal", mode = { "n", "t" } },
-    { "<leader>ll",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next LSP Reference", mode = { "n", "t" } },
-    { "<leader>lL",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev LSP Reference", mode = { "n", "t" } },
+
+    -- Words
+    { "<leader>ll", function() Snacks.words.jump(vim.v.count1) end, desc = "Next LSP Reference", mode = { "n", "t" } },
+    { "<leader>lL", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev LSP Reference", mode = { "n", "t" } },
   },
 }

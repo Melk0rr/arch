@@ -7,7 +7,7 @@ end
 map('', 'Y', 'y$', opts("Yank whole line"))
 map('n', '<leader;', 'mqA;<esc>`q', opts("Semicolon at end of line"))
 map('n', '<leader>h', '<cmd>noh<cr>', opts("No search highlight"))
-map('n', '<leader>zz', '<cmd>wqa!<cr>', opts("Save and quit"))
+map('n', '<leader>qq', '<cmd>wqa!<cr>', opts("Save and quit"))
 map('n', '<C-a>', 'goVG', opts("Select all"))
 
 -- Press jk fast to exit insert mode
@@ -27,6 +27,7 @@ map('t', '<C-l>', [[<C-\><C-n><C-w>l]], opts("Go to right terminal"))
 -- Buffer navigation
 map('n', '<Tab>', '<cmd>bnext<cr>', opts("Next buffer"))
 map('n', '<S-Tab>', '<cmd>bprevious<cr>', opts("Previous buffer"))
+map('n', '<leader>bde', '<cmd>%bd|e#<cr>', opts("Close all buffers except the current one"))
 
 -- Stay in indent mode
 map('v', '<', '<gv^', opts("Unindent"))
@@ -47,7 +48,6 @@ map('n', '<leader>fk', telescope.keymaps, opts("Telescope find keymaps"))
 map('n', '<leader>fC', telescope.commands, opts("Telescope find commands"))
 map('n', '<leader>fg', telescope.grep_string, opts("Telescope grep string"))
 map('n', '<leader>fG', telescope.live_grep, opts("Telescope live grep"))
-map('n', '<leader>fP', '<cmd>Telescope projects<cr>', opts("Telescope projects"))
 map('n', '<leader>ft', '<cmd>TodoTelescope<cr>', opts("Telescope todo comments"))
 
 -- git
