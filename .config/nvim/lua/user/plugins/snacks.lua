@@ -46,6 +46,8 @@ return {
     -- Scroll
     scroll = { enable = true },
 
+    statuscolumn = { enable = true },
+
     -- Terminal
     terminal = {
       win = {
