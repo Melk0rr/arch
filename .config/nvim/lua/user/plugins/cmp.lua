@@ -1,5 +1,5 @@
 return {
-  'hrsh7th/nvim-cmp',
+  "hrsh7th/nvim-cmp",
   dependencies = {
     { "hrsh7th/cmp-path" },
     { "hrsh7th/cmp-vsnip" },
@@ -47,7 +47,7 @@ return {
       scrollbar = false,
     }
 
-    cmp.setup {
+    cmp.setup({
       window = {
         completion = cmp.config.window.bordered(opts),
         documentation = cmp.config.window.bordered(opts),
@@ -102,10 +102,11 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "crates" },
       }, {
         { name = "buffer" },
         { name = "path" },
       }),
-    }
+    })
   end,
 }
