@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  ft = {"asm", "bash", "c", "cpp", "fish", "go", "javascript", "lua", "python", "rust", "yaml"},
   config = function()
     local lspconfig = require("lspconfig")
     local on_attach = function(_, bufnr)
