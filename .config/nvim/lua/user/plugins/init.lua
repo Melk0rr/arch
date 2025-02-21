@@ -5,6 +5,7 @@ return {
   require("user.plugins.cmp"),
   require("user.plugins.colorizer"),
   require("user.plugins.comment"),
+  require("user.plugins.crates"),
   require("user.plugins.csvview"),
   require("user.plugins.dap"),
   require("user.plugins.illuminate"),
