@@ -1,0 +1,33 @@
+# Fonts
+font-family = JetBrains Mono Nerd Font
+font-size = 12
+adjust-underline-position = 4
+adjust-underline-thickness = 130%
+
+# Padding
+window-padding-x = 20
+window-padding-y = 10
+
+# Cursor
+shell-integration = fish
+shell-integration-features = cursor
+
+# Tabs
+gtk-wide-tabs = false
+gtk-tabs-location = bottom
+gtk-custom-css = tab-style.css
+
+# Theme
+window-theme = system
+theme = wallbash
+
+# Split navigation
+keybind = shift+ctrl+h=new_split:left
+keybind = shift+ctrl+l=new_split:right
+keybind = shift+ctrl+k=new_split:up
+keybind = shift+ctrl+j=new_split:down
+
+keybind = ctrl+a>h=goto_split:left
+keybind = ctrl+a>l=goto_split:right
+keybind = ctrl+a>k=goto_split:up
+keybind = ctrl+a>j=goto_split:down
