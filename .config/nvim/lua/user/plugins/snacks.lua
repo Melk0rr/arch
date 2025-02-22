@@ -4,7 +4,13 @@ return {
   lazy = false,
   opts = {
     -- Bigfile
-    bigfile = { enabled = true },
+    bigfile = {
+      enabled = true,
+      notify = true,
+    },
+
+    -- Buffdelete
+    bufdelete = { enabled = true },
 
     -- Dashboard
     dashboard = {
@@ -20,6 +26,17 @@ return {
 
     -- Indend
     indent = { enabled = true },
+
+    -- Input
+    input = {
+      enabled = true,
+      icon = "",
+      icon_hl = "SnacksInputIcon",
+      icon_pos = "left",
+      prompt_pos = "title",
+      win = { style = "input" },
+      expand = true,
+    },
 
     -- Lazygit
     lazygit = {
@@ -38,7 +55,34 @@ return {
     },
 
     -- Notifier
-    notifier = { enabled = false },
+    notifier = {
+      enabled = false,
+      timeout = 3000, -- default timeout in ms
+      width = { min = 40, max = 0.4 },
+      height = { min = 1, max = 0.6 },
+      margin = { top = 0, right = 1, bottom = 0 },
+      padding = true, -- add 1 cell of left/right padding to the notification window
+      sort = { "level", "added" }, -- sort by level and time
+      level = vim.log.levels.TRACE,
+      icons = {
+        error = " ",
+        warn = " ",
+        info = " ",
+        debug = " ",
+        trace = " ",
+      },
+      style = "compact",
+      top_down = true,
+      date_format = "%R",
+      more_format = " ↓ %d lines ",
+      refresh = 50
+    },
+
+    -- Notify
+    notify = { enabled = true },
+
+    -- Profiler
+    profiler = { enabled = true },
 
     -- Quickfile
     quickfile = { enabled = true },
@@ -46,7 +90,19 @@ return {
     -- Scroll
     scroll = { enable = true },
 
-    statuscolumn = { enable = true },
+    statuscolumn = {
+      enable = true,
+      left = { "mark", "sign" },
+      right = { "fold", "git" },
+      folds = {
+        open = false,
+        git_hl = false,
+      },
+      git = {
+        patterns = { "GitSign", "MiniDiffSign" }
+      },
+      refresh = 50
+    },
 
     -- Terminal
     terminal = {
