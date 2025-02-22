@@ -3,10 +3,13 @@ return {
   ft = {"asm", "bash", "c", "cpp", "fish", "go", "javascript", "lua", "python", "rust", "yaml"},
   config = function()
     local lspconfig = require("lspconfig")
+
+    -- On attach function
     local on_attach = function(_, bufnr)
       local opts = function(desc)
         return { noremap = true, silent = true, desc = desc }
       end
+
       local map = vim.keymap.set
       map('n', "<leader>li", vim.lsp.buf.declaration, opts("LSP declaration"))
       map('n', "<leader>lI", vim.lsp.buf.definition, opts("LSP definition"))
@@ -22,21 +25,25 @@ return {
       map('n', "<leader>lS", "<cmd>Telescope lsp_workspace_symbols<CR>", opts("Telescope LSP workspace symbols"))
     end
 
-    lspconfig.bashls.setup({ on_attach = on_attach })                                   -- Bash
-    lspconfig.fish_lsp.setup({ on_attach = on_attach })                                 -- Fish
-    lspconfig.asm_lsp.setup({ on_attach = on_attach })                                  -- Assembly
-    lspconfig.clangd.setup({ on_attach = on_attach })                                   -- C/C++
-    -- lspconfig.rust_analyzer.setup({ on_attach = on_attach })                            -- Rust
-    lspconfig.gopls.setup({ on_attach = on_attach })                                    -- Go
-    lspconfig.ts_ls.setup({ on_attach = on_attach })                                    -- Typescript/Javascript
-    -- lspconfig.nil_ls.setup({ on_attach = on_attach })                                -- Nix
-    lspconfig.hyprls.setup({ on_attach = on_attach })                                   -- Hyprlang
-    lspconfig.markdown_oxide.setup({ on_attach = on_attach })                           -- Markdown
-    lspconfig.jsonls.setup({ on_attach = on_attach })
+    -- Capabilities
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+    lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })                                   -- Bash
+    lspconfig.fish_lsp.setup({ on_attach = on_attach, capabilities = capabilities })                                 -- Fish
+    lspconfig.asm_lsp.setup({ on_attach = on_attach, capabilities = capabilities })                                  -- Assembly
+    lspconfig.clangd.setup({ on_attach = on_attach, capabilities = capabilities })                                   -- C/C++
+    -- lspconfig.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })                            -- Rust
+    lspconfig.gopls.setup({ on_attach = on_attach, capabilities = capabilities })                                    -- Go
+    lspconfig.ts_ls.setup({ on_attach = on_attach, capabilities = capabilities })                                    -- Typescript/Javascript
+    -- lspconfig.nil_ls.setup({ on_attach = on_attach, capabilities = capabilities })                                -- Nix
+    lspconfig.hyprls.setup({ on_attach = on_attach, capabilities = capabilities })                                   -- Hyprlang
+    lspconfig.markdown_oxide.setup({ on_attach = on_attach, capabilities = capabilities })                           -- Markdown
+    lspconfig.jsonls.setup({ on_attach = on_attach, capabilities = capabilities })
 
     -- Python
     lspconfig.ruff.setup({
       on_attach = on_attach,
+      capabilities = capabilities,
       init_options = {
         settings = {
           configuration = "~/.config/ruff/ruff.toml",
@@ -51,6 +58,7 @@ return {
     })
     lspconfig.pylsp.setup({
       on_attach = on_attach,
+      capabilities = capabilities,
       settings = {
         pylsp = {
           plugins = {
@@ -74,6 +82,7 @@ return {
     -- Lua
     lspconfig.lua_ls.setup({
       on_attach = on_attach,
+      capabilities = capabilities,
       on_init = function(client)
         if client.workspace_folders then
           local path = client.workspace_folders[1].name
