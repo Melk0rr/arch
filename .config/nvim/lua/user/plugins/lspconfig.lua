@@ -20,9 +20,6 @@ return {
       map('n', "<leader>lH", vim.lsp.buf.signature_help, opts("LSP signature help"))
       map('n', "<leader>lk", vim.diagnostic.goto_prev, opts("Previous LSP diagnostic"))
       map('n', "<leader>lj", vim.diagnostic.goto_next, opts("Next LSP diagnostic"))
-      map('n', "<leader>ld", "<cmd>Telescope diagnostics<CR>", opts("Telescope LSP diagnostics"))
-      map('n', "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>", opts("Telescope LSP document symbols"))
-      map('n', "<leader>lS", "<cmd>Telescope lsp_workspace_symbols<CR>", opts("Telescope LSP workspace symbols"))
     end
 
     -- Capabilities
