@@ -28,7 +28,7 @@ Adjust_Wallbash () {
   distance1=$(monet -c "${saturated[0]}" -c "${saturated[3]}" -d)
   distance2=$(monet -c "${saturated[0]}" -c "${saturated[2]}" -d)
 
-  if [[ "${distance2}" > "${distance1}" ]] ; then
+  if [[ $distance2 > $distance1 ]] ; then
     oldSecondCol="${colors[2]}"
     newSecondCol="${saturated[2]}"
   fi
@@ -39,7 +39,7 @@ Adjust_Wallbash () {
 
 OpenRGB_Wallbash () {
   # If there is a custom profile : use it
-  if [[ -f "${customCol}" ]] ; then
+  if [[ -f $customCol ]] ; then
     col="${customCol}"
   
   else
@@ -49,7 +49,7 @@ OpenRGB_Wallbash () {
 
   openrgbCmd="openrgb"
 
-  if [[ "${start}" == true ]] ; then
+  if [[ $start == true ]] ; then
     openrgbCmd+=" --startminimized --server"
   fi
 
@@ -66,7 +66,7 @@ OpenRGB_Wallbash () {
       
       device=${devSearch[0]}
       
-      if [[ ! -z "$device" ]] ; then
+      if [[ ! -z $device ]] ; then
         deviceList=( "${deviceList[@]/$device}" )
 
         devId=$( echo $device | cut -s -f 1 -d : )
@@ -76,7 +76,7 @@ OpenRGB_Wallbash () {
     i=$((i+1));
   done < "$col"
   
-  if [[ "${start}" == false ]] ; then
+  if [[ $start == false ]] ; then
     openrgbCmd+=" -sp wallbash.orp"
   fi
   
@@ -85,7 +85,7 @@ OpenRGB_Wallbash () {
 }
 
 OpenRGB_Start () {
-  if [[ "${mode}" == "wallbash" ]] ; then
+  if [[ $mode == "wallbash" ]] ; then
     OpenRGB_Wallbash
 
   else
@@ -95,12 +95,12 @@ OpenRGB_Start () {
 
 ln -fs "${hydeThemeDir}/openrgb.orp" "${confDir}/OpenRGB/theme.orp"
 
-if [[ -f "${openrgbConf}" ]] ; then
+if [[ -f $openrgbConf ]] ; then
   mode=$(cat "${openrgbConf}" | awk -F '=' '{print $2}')
 fi
 
 # If mode is not wallbash and there is no theme profile nor custom profile for current wpp : set mode to wallbash
-if [[ "${mode}" != "wallbash" && ! -f "${themeProf}" && ! -f "${customCol}" ]] ; then
+if [[ $mode != "wallbash" && ! -f $themeProf && ! -f $customCol ]] ; then
   mode="wallbash"
 fi
 
@@ -112,7 +112,7 @@ s|-s|--start)
 g|-g|--generate)
   start=false
 
-  if [[ "${mode}" == "wallbash" ]] ; then
+  if [[ $mode == "wallbash" ]] ; then
     OpenRGB_Wallbash
 
   else
