@@ -7,7 +7,6 @@ return {
       ensure_installed = {
         "bash",
         "c",
-        "cmake",
         "cpp",
         "css",
         "fish",
@@ -18,14 +17,12 @@ return {
         "lua",
         "make",
         "markdown",
-        -- "powershell",
         "python",
         "regex",
         "rust",
         "toml",
         "typescript",
         "vim",
-        "vimdoc",
         "yaml"
       },
       highlight = { enable = true },
@@ -71,10 +68,10 @@ return {
         swap = {
           enable = true,
           swap_next = {
-            ['<leader>sj'] = '@parameter.inner',
+            ['gSj'] = '@parameter.inner',
           },
           swap_previous = {
-            ['<leader>sk'] = '@parameter.inner',
+            ['gSk'] = '@parameter.inner',
           },
         },
       },
