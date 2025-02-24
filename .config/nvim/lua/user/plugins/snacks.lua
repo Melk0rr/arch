@@ -1,7 +1,6 @@
 return {
   {
     "folke/snacks.nvim",
-    priority = 1000,
     lazy = false,
     opts = {
       -- NOTE: Bigfile
@@ -217,57 +216,6 @@ return {
 
       -- NOTE: Words
       words = { enabled = true },
-    },
-    keys = {
-      -- NOTE: Dashboard
-      { "<leader>a" , function() Snacks.dashboard() end, desc = "Snacks dashboard" },
-
-      -- NOTE: Explorer
-      { "<leader>e" , function() Snacks.picker.explorer() end, desc = "File explorer" },
-
-      -- NOTE: Picker find
-      { '<leader>fa' , function() Snacks.picker.autocmds() end, desc = "Find autocmds" },
-      { "<leader>fb" , function() Snacks.picker.buffers() end, desc = "Find buffers" },
-      { "<leader>fB" , function() Snacks.picker.grep_buffers() end, desc = "Grep open buffers" },
-      { "<leader>fc" , function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find config files" },
-      { "<leader>fC" , function() Snacks.picker.commands() end, desc = "Find commands" },
-      { "<leader>ff" , function() Snacks.picker.files() end, desc = "Find files" },
-      { "<leader>fg" , function() Snacks.picker.grep_word() end, desc = "Grep selection" },
-      { "<leader>fG" , function() Snacks.picker.grep() end, desc = "Live grep" },
-      { "<leader>fh" , function() Snacks.picker.highlights() end, desc = "Find highlights" },
-      { "<leader>fH" , function() Snacks.picker.help() end, desc = "Find help pages" },
-      { "<leader>fi" , function() Snacks.picker.icons() end, desc = "Find icons" },
-      { "<leader>fk" , function() Snacks.picker.keymaps({ layout = "vertical" }) end, desc = "Find keymaps" },
-      { "<leader>fM" , function() Snacks.picker.man() end, desc = "Find man pages" },
-      { "<leader>fp" , function() Snacks.picker.projects() end, desc = "Find projects" },
-      { "<leader>fr" , function() Snacks.picker.recent() end, desc = "Find recent files" },
-      { "<leader>ft" , function() Snacks.picker.todo_comments() end, desc = "Find Todo comments" },
-      { "<leader>fT" , function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Find Todo/Fix/Fixme" },
-
-      -- NOTE: Picker search
-      { '<leader>s"' , function() Snacks.picker.registers() end, desc = "Search registers" },
-      { '<leader>s:' , function() Snacks.picker.command_history() end, desc = "Search command history" },
-      { '<leader>s/' , function() Snacks.picker.search_history() end, desc = "Search history" },
-      { '<leader>su' , function() Snacks.picker.undo() end, desc = "Search undo history" },
-
-      -- NOTE: Git
-      { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
-      { "<leader>gB", function() Snacks.git_branches() end, desc = "Git branches" },
-      { "<leader>gd", function() Snacks.git_diff() end, desc = "Git differences" },
-      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-      { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
-      { "<leader>gs", function() Snacks.git_status() end, desc = "Git status" },
-
-      -- NOTE: Terminal
-      { "<leader>tt", function() Snacks.terminal() end, desc = "Toggle Terminal", mode = { "n", "t" } },
-
-      -- NOTE: Words & LSP
-      { "<leader>ld", function() Snacks.picker.diagnostics() end, desc = "Find LSP diagnostics" },
-      { "<leader>ll", function() Snacks.words.jump(vim.v.count1) end, desc = "Next LSP Reference", mode = { "n", "t" } },
-      { "<leader>lL", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev LSP Reference", mode = { "n", "t" } },
-      { "<leader>lR", function() Snacks.picker.references() end, desc = "Find LSP references" },
-      { "<leader>ls", function() Snacks.picker.lsp_symbols() end, desc = "Find LSP symbols" },
-      { "<leader>lS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Find LSP workspace symbols" },
     },
   },
 
