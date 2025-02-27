@@ -70,7 +70,7 @@ map('n', "<leader>fc", "<cmd>lua require('snacks').picker.files()<cr>", opts("Fi
 map('n', "<leader>fC", "<cmd>lua require('snacks').picker.commands()<cr>", opts("Find commands"))
 map('n', "<leader>ff", "<cmd>lua require('snacks').picker.files()<cr>", opts("Find files"))
 map('n', "<leader>fg", "<cmd>lua require('snacks').picker.grep_word()<cr>", opts("Grep selection"))
-map('n', "<leader>fG", "<cmd>lua require('snacks').picker.grep()<cr>", opts("Live grep"))
+map('n', "<leader>fG", "<cmd>lua require('snacks').picker.grep({ focus = 'input' })<cr>", opts("Live grep"))
 map('n', "<leader>fh", "<cmd>lua require('snacks').picker.highlights()<cr>", opts("Find highlights"))
 map('n', "<leader>fH", "<cmd>lua require('snacks').picker.help()<cr>", opts("Find help pages"))
 map('n', "<leader>fi", "<cmd>lua require('snacks').picker.icons()<cr>", opts("Find icons"))
@@ -78,8 +78,8 @@ map('n', "<leader>fk", "<cmd>lua require('snacks').picker.keymaps({ layout = 've
 map('n', "<leader>fM", "<cmd>lua require('snacks').picker.man()<cr>", opts("Find man pages"))
 map('n', "<leader>fp", "<cmd>lua require('snacks').picker.projects()<cr>", opts("Find projects"))
 map('n', "<leader>fr", "<cmd>lua require('snacks').picker.recent()<cr>", opts("Find recent files"))
-map('n', "<leader>fr", "<cmd>lua require('snacks').picker.todo_comments()<cr>", opts("Find Todo comments"))
-map('n', "<leader>fr", "<cmd>lua require('snacks').picker.todo_comments({ 'TODO', 'FIX', 'FIXME' })<cr>", opts("Find Todo/Fix/Fixme"))
+map('n', "<leader>ft", "<cmd>lua require('snacks').picker.todo_comments()<cr>", opts("Find Todo comments"))
+map('n', "<leader>fT", "<cmd>lua require('snacks').picker.todo_comments({ 'TODO', 'FIX', 'FIXME' })<cr>", opts("Find Todo/Fix/Fixme"))
 
 -- NOTE: Picker search
 map('n', '<leader>s"', "<cmd>lua require('snacks').picker.registers()<cr>", opts("Search registers"))
