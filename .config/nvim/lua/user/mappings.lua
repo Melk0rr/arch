@@ -99,3 +99,6 @@ map('n', "<leader>lR", "<cmd>lua require('snacks').picker.references()<cr>", opt
 map('n', "<leader>ls", "<cmd>lua require('snacks').picker.lsp_symbols({ layout = 'vertical' })<cr>", opts("Find LSP symbols"))
 map('n', "<leader>lS", "<cmd>lua require('snacks').picker.lsp_workspace_symbols({ layout = 'vertical' })<cr>", opts("Find LSP workspace symbols"))
 map('n', "<leader>lcp", "<cmd>CccPick<cr>", opts("Toggles color picker"))
+map('n', "<leader>lCd", "<cmd>RainbowDelim<cr>", opts("Rainbow CSV delim with character under cursor"))
+map('n', "<leader>lCa", "<cmd>RainbowAlign<cr>", opts("Rainbow CSV align"))
+map('n', "<leader>lCs", "<cmd>RainbowShrink<cr>", opts("Rainbow CSV shrink"))
