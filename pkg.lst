@@ -81,6 +81,7 @@ qt5-graphicaleffects
 # --------------------------------------------------- // Shell
 eza
 fastfetch
+fd
 fish
 fzf
 kitty-git
