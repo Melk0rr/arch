@@ -92,6 +92,7 @@ map({ 'n', 't' }, "<leader>tt", "<cmd>lua require('snacks').terminal()<cr>", opt
 
 -- NOTE: Words & LSP
 map('n', "<leader>ld", "<cmd>lua require('snacks').picker.diagnostics()<cr>", opts("Find LSP diagnostics"))
+map('n', "<leader>lD", "<cmd>lua require('snacks').picker.diagnostics_buffer()<cr>", opts("Find LSP buffer diagnostics"))
 map('n', "<leader>ll", "<cmd>lua require('snacks').words.jump(vim.v.count1)<cr>", opts("Next LSP reference"))
 map('n', "<leader>lL", "<cmd>lua require('snacks').words.jump(-vim.v.count1)<cr>", opts("Previous LSP reference"))
 map('n', "<leader>lR", "<cmd>lua require('snacks').picker.references()<cr>", opts("Find LSP references"))
