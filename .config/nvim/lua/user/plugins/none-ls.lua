@@ -6,10 +6,6 @@ return {
       sources = {
         -- Lua
         null_ls.builtins.formatting.stylua,
-
-        -- JS
-        null_ls.builtins.formatting.prettier,
-        null_ls.builtins.diagnostics.eslint_d,
       }
     })
   end
