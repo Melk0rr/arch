@@ -35,6 +35,8 @@ return {
     -- lspconfig.nil_ls.setup({ on_attach = on_attach, capabilities = capabilities })                                -- Nix
     lspconfig.hyprls.setup({ on_attach = on_attach, capabilities = capabilities })                                   -- Hyprlang
     lspconfig.markdown_oxide.setup({ on_attach = on_attach, capabilities = capabilities })                           -- Markdown
+    -- INFO: CSS
+    lspconfig.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
     lspconfig.jsonls.setup({ on_attach = on_attach, capabilities = capabilities })
 
     -- Python
