@@ -86,6 +86,7 @@ map('n', "<leader>fT", "<cmd>lua require('snacks').picker.todo_comments({ 'TODO'
 map('n', '<leader>s"', "<cmd>lua require('snacks').picker.registers()<cr>", opts("Search registers"))
 map('n', "<leader>s:", "<cmd>lua require('snacks').picker.command_history()<cr>", opts("Search command history"))
 map('n', "<leader>s/", "<cmd>lua require('snacks').picker.search_history()<cr>", opts("Search history"))
+map('n', "<leader>sn", "<cmd>lua require('snacks').notifier.show_history()<cr>", opts("Search history"))
 map('n', "<leader>su", "<cmd>lua require('snacks').picker.undo({ layout = 'vertical' })<cr>", opts("Search undo history"))
 
 -- NOTE: Terminal
