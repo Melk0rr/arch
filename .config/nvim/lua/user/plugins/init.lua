@@ -2,7 +2,7 @@ return {
   require("user.plugins.base16"),
   require("user.plugins.bufferline"),
   require("user.plugins.blink"),
-  require("user.plugins.colorizer"),
+  require("user.plugins.ccc"),
   require("user.plugins.crates"),
   require("user.plugins.dap"),
   require("user.plugins.illuminate"),
