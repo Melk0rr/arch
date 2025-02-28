@@ -98,3 +98,4 @@ map('n', "<leader>lL", "<cmd>lua require('snacks').words.jump(-vim.v.count1)<cr>
 map('n', "<leader>lR", "<cmd>lua require('snacks').picker.references()<cr>", opts("Find LSP references"))
 map('n', "<leader>ls", "<cmd>lua require('snacks').picker.lsp_symbols({ layout = 'vertical' })<cr>", opts("Find LSP symbols"))
 map('n', "<leader>lS", "<cmd>lua require('snacks').picker.lsp_workspace_symbols({ layout = 'vertical' })<cr>", opts("Find LSP workspace symbols"))
+map('n', "<leader>lcp", "<cmd>CccPick<cr>", opts("Toggles color picker"))
