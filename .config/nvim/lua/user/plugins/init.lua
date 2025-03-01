@@ -13,11 +13,11 @@ return {
   require("user.plugins.mason"),
   require("user.plugins.mini"),
   require("user.plugins.noice"),
-  require("user.plugins.none-ls"),
   require("user.plugins.rainbowcsv"),
   require("user.plugins.rustaceanvim"),
   require("user.plugins.snacks"),
   require("user.plugins.todo-comments"),
+  require("user.plugins.tokyonight"),
   require("user.plugins.treesitter"),
   require("user.plugins.whichkey"),
 }
