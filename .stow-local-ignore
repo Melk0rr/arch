@@ -1,6 +1,8 @@
 pkg.lst
+README.md
 .git
 .gitignore
+.gitmodules
 .directory
 .vscode-oss
 .mozilla
