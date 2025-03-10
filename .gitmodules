@@ -1,3 +1,4 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git@github.com:Melk0rr/nvim.git
+	branch = tokyonight
