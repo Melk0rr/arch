@@ -1,7 +1,0 @@
-  "custom/launcher": {
-    "format": "",
-    "rotate": ${r_deg},
-    "on-click": "pkill -x rofi || rofilaunch.sh d",
-    "on-click-right": "logoutlaunch.sh 2",
-    "tooltip": false
-  },

@@ -1,7 +1,0 @@
-  "group/cpugroup": {
-    "orientation": "horizontal",
-    "modules": [
-      "cpu",
-      "custom/cpuinfo"
-    ]
-  },

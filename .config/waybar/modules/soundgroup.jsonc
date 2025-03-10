@@ -1,7 +1,0 @@
-  "group/soundgroup": {
-    "orientation": "horizontal",
-    "modules": [
-      "pulseaudio",
-      "pulseaudio#microphone"
-    ]
-  },
