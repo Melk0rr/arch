@@ -1,4 +1,7 @@
-![archlinux](./arch.svg)
+<div align="center">
+    <img src="./arch.svg" />
+</div>
+
 # Arch Linux
 ## Description
 My dotfiles for Arch Linux
