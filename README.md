@@ -1,6 +1,8 @@
+![archlinux](./arch.svg)
 # Arch Linux
 ## Description
 My dotfiles for Arch Linux
+
 ## Requirements
 - git
 ```shell
