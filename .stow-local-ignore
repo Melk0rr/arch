@@ -6,7 +6,6 @@ README.md
 .directory
 .vscode-oss
 .mozilla
-.themes
 .config/ags
 .config/dunst/icons/vol
 .config/dunst/icons/hyprdots.svg
