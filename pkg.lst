@@ -23,6 +23,7 @@ wl-clipboard
 # --------------------------------------------------- // WM
 dunst
 grimblast-git
+hypridle-git
 hyprland-git
 hyprland-qtutils-git
 hyprlock-git
@@ -49,12 +50,11 @@ libnotify
 kvantum
 kvantum-qt5
 nwg-look
-qt5-wayland
 qt6-wayland
-qt5ct
+qt5-wayland
 qt6ct
+qt5ct
 tela-circle-icon-theme-all
-
 
 # --------------------------------------------------- // Fonts
 noto-fonts-emoji
@@ -84,7 +84,7 @@ fastfetch
 fd
 fish
 fzf
-kitty-git
+ghostty
 oh-my-posh-bin
 translate-shell
 rclone-git
