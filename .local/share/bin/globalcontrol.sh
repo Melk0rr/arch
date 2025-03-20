@@ -3,20 +3,41 @@
 # HYDE-CLI
 export CLI_PATH=$(dirname $(dirname ${0}))
 export PATH=$PATH:${CLI_PATH}/lib/hyde-cli/
-export HYDE_RUNTIME_DIR=$XDG_RUNTIME_DIR/hyde
 
 # Cli Configs
 export etcDir="/etc/hyde-cli"
  [[ "${CLI_PATH}" == *"/usr"* ]] || etcDir="$HOME/.hyde"
 export usrDir="${CLI_PATH}/share/hyde-cli"
 
-#// hyde envs
+# xdg resolution
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+
+# hyde envs
+export HYDE_CONFIG_HOME="${XDG_CONFIG_HOME}/hyde"
+export HYDE_DATA_HOME="${XDG_DATA_HOME}/hyde"
+export HYDE_CACHE_HOME="${XDG_CACHE_HOME}/hyde"
+export HYDE_STATE_HOME="${XDG_STATE_HOME}/hyde"
+export HYDE_RUNTIME_DIR="${XDG_RUNTIME_DIR}/hyde"
+export ICONS_DIR="${XDG_DATA_HOME}/icons"
+export FONTS_DIR="${XDG_DATA_HOME}/fonts"
+export THEMES_DIR="${XDG_DATA_HOME}/themes"
+
+#legacy hyde envs // should be deprecated
+
 export confDir="${XDG_CONFIG_HOME:-$HOME/.config}"
-export hydeConfDir="${confDir}/hyde"
-export cacheDir="$HOME/.cache/hyde"
-export thmbDir="${cacheDir}/thumbs"
-export dcolDir="${cacheDir}/dcols"
+export hydeConfDir="$HYDE_CONFIG_HOME"
+export cacheDir="$HYDE_CACHE_HOME"
+export thmbDir="$HYDE_CACHE_HOME/thumbs"
+export dcolDir="$HYDE_CACHE_HOME/dcols"
+export iconsDir="$ICONS_DIR"
+export themesDir="$THEMES_DIR"
+export fontsDir="$FONTS_DIR"
 export hashMech="sha1sum"
+
 
 source_user() {
     [ -f "${hydeConfDir}/hyde.conf" ] && . "${hydeConfDir}/hyde.conf"
