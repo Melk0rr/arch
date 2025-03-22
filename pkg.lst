@@ -124,10 +124,16 @@ winetricks
 
 # --------------------------------------------------- // Dev
 appflowy-bin
+clang
+go
+lua
+luarocks
 neovim
+npm
 python-pip
 python-pipx
-vscodium
+rust
+rust-analyzer
 vim
 
 # --------------------------------------------------- // Applications
