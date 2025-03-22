@@ -124,6 +124,7 @@ winetricks
 
 # --------------------------------------------------- // Dev
 appflowy-bin
+busted
 clang
 go
 lua
