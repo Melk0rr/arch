@@ -1,6 +1,6 @@
 # Applications
 set -gx EDITOR 'nvim'
-set -gx TERMINAL 'kitty'
+set -gx TERMINAL 'ghostty'
 
 # Commands to run in interactive sessions can go here
 if status is-interactive
