@@ -1,10 +1,10 @@
-#!/usr/bin/env sh
+#! /bin/env bash
 
-ScrDir=`dirname "$(realpath "$0")"`
-source $ScrDir/globalcontrol.sh
+ScrDir=$(dirname "$(realpath "$0")")
+source "$ScrDir/globalcontrol.sh"
 
 monitorInfo=$( ddcutil detect )
-monitors=($( echo "$monitorInfo" | grep "I2C bus:" | awk -F ': ' '{print $2}' ))
+mapfile monitors < <(echo "$monitorInfo" | grep "I2C bus:" | awk -F ': ' '{print $2}')
 model=$( echo "$monitorInfo" | grep "Model:" | awk -F ': ' '{print $2}' | head -n 1 | xargs )
 
 print_error() {
@@ -24,7 +24,7 @@ get_brightness() {
 
 send_notification() {
     brightness=$(get_brightness)
-    angle=$(((($brightness + 2) / 5) * 5))
+    angle=$((((brightness + 2) / 5) * 5))
     ico="$HOME/.config/dunst/icons/vol/vol-${angle}.svg"
     
     notify-send -a "t2" -r 91190 -t 800 -i "${ico}" "Brightness ${brightness}" "${model}"
@@ -32,17 +32,17 @@ send_notification() {
 
 set_brightness() {
     for v in "${monitors[@]}" ; do
-        bus=$( echo $v | awk -F '-' '{print $2}' )
+        bus=$( echo "$v" | awk -F '-' '{print $2}' )
         
         case $1 in
         i)
-            ddcutil setvcp 10 + $2 --bus=$bus
+            ddcutil setvcp 10 + "$2" --bus="$bus"
             ;;
         d)
-            ddcutil setvcp 10 - $2 --bus=$bus
+            ddcutil setvcp 10 - "$2" --bus="$bus"
             ;;
         *)
-            ddcutil setvcp 10 $2 --bus=$bus
+            ddcutil setvcp 10 "$2" --bus="$bus"
             ;;
         esac
     done
@@ -77,7 +77,7 @@ s)
         # avoid 0% brightness
         set_brightness s 2
     else
-        set_brightness s $2
+        set_brightness s "$2"
     fi
     send_notification ;;
 g)
