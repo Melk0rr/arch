@@ -168,15 +168,19 @@ ${modules_ls}
     color: @wb-act-fg;
 }
 
-#custom-launcher, #mediagroup, #soundgroup, #cpugroup {
+#custom-launcher, #mediagroup, #soundgroup, #cpugroup, #custom-hyprsunset {
     border-radius: ${x2rb_radius}px;
     margin-right: 4px;
     margin-left: 4px;
 }
 
-#custom-launcher {
+#custom-launcher, #custom-hyprsunset {
     padding-left: 15px;
     padding-right: 20px;
+    font-size: 1.2rem;
+}
+
+#custom-launcher {
     color: @main-bg;
     background-color: @alt-fg;
 }
@@ -207,4 +211,8 @@ ${modules_ls}
 
 #cpugroup {
     color: @main-fg;
+}
+
+#custom-hyprsunset {
+    background: linear-gradient(55deg, @fourth-bg 40%, @main-bg);
 }
