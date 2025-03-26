@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#! /bin/env bash
 
 scrDir="$(dirname "$(realpath "$0")")"
 source "${scrDir}/globalcontrol.sh"
@@ -16,19 +16,19 @@ themeProf="${hydeThemeDir}/openrgb.orp"
 customCol="${cacheDir}/orp/${wppName}.conf"
 openrgbCol="$HOME/.config/OpenRGB/colors.conf"
 
-colors=($( cut -s -f 2 -d @ "${openrgbCol}" | cut -s -f 2 -d : ))
+mapfile colors < <(cut -s -f 2 -d @ "${openrgbCol}" | cut -s -f 2 -d :)
 
-Adjust_Wallbash () {
-  monetSatCmd="monet -c $(echo "${colors[@]}" | sed 's/ / -c /g') -s 1"
-  saturated=($(eval "${monetSatCmd}"))
+Adjust_Wallbash() {
+  monetSatCmd="monet -c $("${colors[*]}// / -c /g") -s 1"
+  mapfile saturated < <(eval "${monetSatCmd}")
 
   oldSecondCol="${colors[3]}"
   newSecondCol="${saturated[3]}"
-  
+
   distance1=$(monet -c "${saturated[0]}" -c "${saturated[3]}" -d)
   distance2=$(monet -c "${saturated[0]}" -c "${saturated[2]}" -d)
 
-  if [[ $distance2 > $distance1 ]] ; then
+  if [[ $distance2 > $distance1 ]]; then
     oldSecondCol="${colors[2]}"
     newSecondCol="${saturated[2]}"
   fi
@@ -37,11 +37,11 @@ Adjust_Wallbash () {
   sed -i "s/${oldSecondCol}/${newSecondCol:1}/g" "${openrgbCol}"
 }
 
-OpenRGB_Wallbash () {
+OpenRGB_Wallbash() {
   # If there is a custom profile : use it
-  if [[ -f $customCol ]] ; then
+  if [[ -f $customCol ]]; then
     col="${customCol}"
-  
+
   else
     Adjust_Wallbash
     col="${openrgbCol}"
@@ -49,43 +49,46 @@ OpenRGB_Wallbash () {
 
   openrgbCmd="openrgb"
 
-  if [[ $start == true ]] ; then
+  if [[ $start == true ]]; then
     openrgbCmd+=" --startminimized --server"
   fi
 
   deviceList=("${devices[@]}")
 
   i=0
-  while read -r line ; do
-    if [[ $line =~ ^# ]] ; then
-      read line1
+  while read -r line; do
+    if [[ $line =~ ^# ]]; then
+      read -r line1
 
-      devName=$( echo $line | cut -s -f 2 -d : )
-      devStr=$( IFS=$'\n'; echo "${deviceList[*]}" )
-      mapfile -t devSearch < <( echo "${devStr}" | grep "${devName}" )
-      
+      devName=$(echo "$line" | cut -s -f 2 -d :)
+      devStr=$(
+        IFS=$'\n'
+        echo "${deviceList[*]}"
+      )
+      mapfile -t devSearch < <(echo "${devStr}" | grep "${devName}")
+
       device=${devSearch[0]}
-      
-      if [[ ! -z $device ]] ; then
-        deviceList=( "${deviceList[@]/$device}" )
 
-        devId=$( echo $device | cut -s -f 1 -d : )
+      if [[ -n $device ]]; then
+        deviceList=("${deviceList[@]/$device/}")
+
+        devId=$(echo "$device" | cut -s -f 1 -d :)
         openrgbCmd+=" -d ${devId} -c ${line1} -m Direct"
       fi
     fi
-    i=$((i+1));
-  done < "$col"
-  
-  if [[ $start == false ]] ; then
+    i=$((i + 1))
+  done <"$col"
+
+  if [[ $start == false ]]; then
     openrgbCmd+=" -sp wallbash.orp"
   fi
-  
+
   echo -e "${openrgbCmd}\n"
   eval "${openrgbCmd}"
 }
 
-OpenRGB_Start () {
-  if [[ $mode == "wallbash" ]] ; then
+OpenRGB_Start() {
+  if [[ $mode == "wallbash" ]]; then
     OpenRGB_Wallbash
 
   else
@@ -95,24 +98,24 @@ OpenRGB_Start () {
 
 ln -fs "${hydeThemeDir}/openrgb.orp" "${confDir}/OpenRGB/theme.orp"
 
-if [[ -f $openrgbConf ]] ; then
-  mode=$(cat "${openrgbConf}" | awk -F '=' '{print $2}')
+if [[ -f $openrgbConf ]]; then
+  mode=$(awk -F '=' '{print $2}' "${openrgbConf}")
 fi
 
 # If mode is not wallbash and there is no theme profile nor custom profile for current wpp : set mode to wallbash
-if [[ $mode != "wallbash" && ! -f $themeProf && ! -f $customCol ]] ; then
+if [[ $mode != "wallbash" && ! -f $themeProf && ! -f $customCol ]]; then
   mode="wallbash"
 fi
 
 case "${1}" in
-s|-s|--start)
+s | -s | --start)
   start=true
   OpenRGB_Start
   ;;
-g|-g|--generate)
+g | -g | --generate)
   start=false
 
-  if [[ $mode == "wallbash" ]] ; then
+  if [[ $mode == "wallbash" ]]; then
     OpenRGB_Wallbash
 
   else
