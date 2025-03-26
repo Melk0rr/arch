@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/bash
 # From https://github.com/prasanthrangan/hyprdots/pull/952
 # All credits to https://github.com/mislah
 # Modified: The HyDE Project
@@ -15,8 +15,9 @@ map_floor() {
   for pair in "${pairs[@]}"; do
     IFS=':' read -r key value <<<"$pair"
     num="${2%%.*}"
-    # if awk -v num="$2" -v k="$key" 'BEGIN { exit !(num > k) }'; then #! causes 50ms+ delay
-    if [[ "$num" =~ ^-?[0-9]+$ && "$key" =~ ^-?[0-9]+$ ]]; then # TODO Faster than awk but I might be dumb so checks might be lacking
+    # If awk -v num="$2" -v k="$key" 'BEGIN { exit !(num > k) }'; then #! causes 50ms+ delay
+    # TODO: Faster than awk but I might be dumb so checks might be lacking
+    if [[ "$num" =~ ^-?[0-9]+$ && "$key" =~ ^-?[0-9]+$ ]]; then
       if ((num > key)); then
         echo "$value"
         return
