@@ -15,5 +15,10 @@ group {
     groupbar {
         col.active = rgba(<wallbash_pry4>ff)
         col.inactive = rgba(<wallbash_pry4>82)
+        font_size = 11
+        rounding = 2
+        indicator_height = 6
+        gaps_in = 5
+        gaps_out = 5
     }
 }
