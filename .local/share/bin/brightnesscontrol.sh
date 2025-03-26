@@ -52,10 +52,10 @@ case $1 in
 i)
   currentBrightness=$(get_brightness)
   if [[ "$currentBrightness" -lt 10 ]]; then
-    # increase the brightness by 1% if less than 10%
+    # Increase the brightness by 1% if less than 10%
     set_brightness i 1
   else
-    # increase the brightness by 5% otherwise
+    # Increase the brightness by 5% otherwise
     set_brightness i 5
   fi
   send_notification
@@ -63,20 +63,20 @@ i)
 d)
   currentBrightness=$(get_brightness)
   if [[ "$currentBrightness" -le 2 ]]; then
-    # avoid 0% brightness
+    # Avoid 0% brightness
     set_brightness s 2
   elif [[ "$currentBrightness" -le 10 ]]; then
-    # decrease the brightness by 1% if less than 10%
+    # Decrease the brightness by 1% if less than 10%
     set_brightness d 1
   else
-    # decrease the brightness by 5% otherwise
+    # Decrease the brightness by 5% otherwise
     set_brightness d 5
   fi
   send_notification
   ;;
 s)
   if [[ $2 -le 2 ]]; then
-    # avoid 0% brightness
+    # Avoid 0% brightness
     set_brightness s 2
   else
     set_brightness s "$2"
