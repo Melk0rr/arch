@@ -18,6 +18,14 @@ group {
     col.border_inactive = rgba(86aaeccc) rgba(93cee9cc) 45deg
     col.border_locked_active = rgba(90ceaaff) rgba(ecd3a0ff) 45deg
     col.border_locked_inactive = rgba(86aaeccc) rgba(93cee9cc) 45deg
+
+    groupbar {
+        font_size = 11
+        rounding = 2
+        indicator_height = 6
+        gaps_in = 5
+        gaps_out = 5
+    }
 }
 
 decoration {
