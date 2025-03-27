@@ -1,5 +1,19 @@
-import json
+#!/usr/bin/python
 
+import json
+import os
+import sys
+
+import pyutils.logger as logger
+import pyutils.pip_env as pip_env
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+logger = logger.get_logger()
+
+pip_env.v_import(
+    "pyamdgpuinfo"
+)  # fetches the module by name // does `pip install --update pyamdgpuinfo` under the hood
 import pyamdgpuinfo
 
 
@@ -76,9 +90,20 @@ def main():
         # Print the JSON string
         print(json_output)
 
-    except Exception as e:
-        print(f"Error: {str(e)}")
+    except json.JSONDecodeError as e:  # Handle JSON decoding errors (e.g., invalid JSON)
+        print(f"JSON Error: {str(e)}")
+    except AttributeError as e:  # Handle attribute errors (e.g., method not found)
+        print(f"Attribute Error: {str(e)}")
+    except ValueError as e:  # Handle value errors (e.g., invalid value for formatting)
+        print(f"Value Error: {str(e)}")
+    except RuntimeError as e:  # Handle runtime errors (e.g., issues with querying the GPU)
+        print(f"Runtime Error: {str(e)}")
+    except OSError as e:  # Handle OS-related errors (e.g., hardware issues)
+        print(f"OS Error: {str(e)}")
+    except Exception as e:  # Handle any other unexpected errors
+        print(f"Unexpected Error: {str(e)}")
 
 
 if __name__ == "__main__":
     main()
+
