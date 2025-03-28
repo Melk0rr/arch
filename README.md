@@ -58,5 +58,5 @@ My Arch environment relies essentially on [Hyprland](https://wiki.hyprland.org/)
 - qt5ct
 
 ## Packages
-Some of the packages I use
+Some of the packages I use : [pkg.lst](./pkg.lst) 
 
