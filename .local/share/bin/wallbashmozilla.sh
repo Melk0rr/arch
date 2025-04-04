@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/bash
 
 #// set variables
 scrDir="$(dirname "$(realpath "$0")")"
@@ -13,11 +13,11 @@ mozDir="$HOME/.mozilla/firefox/${mozProfile}"
 floorpDir="$HOME/.floorp/${floorpProfile}"
 zenDir="$HOME/.zen/${zenProfile}"
 
-mkdir -p $mozDir/chrome
-mkdir -p $floorpDir/chrome
-mkdir -p $zenDir/chrome
+mkdir -p "$mozDir"/chrome
+mkdir -p "$floorpDir"/chrome
+mkdir -p "$zenDir"/chrome
 
-ln -sf "$(readlink "${wallSet}")" $mozDir/chrome/wall.set
-ln -sf "$(readlink "${wallSet}")" $floorpDir/chrome/wall.set
-ln -sf "$(readlink "${wallSet}")" $zenDir/chrome/wall.set
-magick "$(readlink "${wallSet}")" $HOME/.config/BraveSoftware/Brave-Browser/wall.jpg
+ln -sf "$(readlink "${wallSet}")" "$mozDir"/chrome/wall.set
+ln -sf "$(readlink "${wallSet}")" "$floorpDir"/chrome/wall.set
+ln -sf "$(readlink "${wallSet}")" "$zenDir"/chrome/wall.set
+magick "$(readlink "${wallSet}")" "$HOME"/.config/BraveSoftware/Brave-Browser/wall.jpg

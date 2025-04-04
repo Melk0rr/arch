@@ -11,7 +11,7 @@ minWidth=2560
 minHeight=1440
 
 # Check if path is valid
-if [[ ! -d "${wallDir}" ]]; then
+if [[ ! -d $wallDir ]]; then
   echo "Invalid path provided !"
   exit 1
 fi
