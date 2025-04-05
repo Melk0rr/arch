@@ -14,7 +14,7 @@ max=20000
 notify="${waybar_temperature_notification:-true}"
 
 # Ensure the configuration file exists, create it if not
-if [ ! -f "$sunsetConf" ]; then
+if [[ ! -f $sunsetConf ]]; then
     echo "{\"temp\": $default, \"user\": 1}" > "$sunsetConf"
 fi
 
@@ -40,21 +40,21 @@ clamp_temp() {
 
 print_error() {
     cat << EOF
-    $(basename ${0}) <action> [mode]
+    $(basename "${0}") <action> [mode]
     ...valid actions are...
         i -- <i>ncrease screen temperature [+500]
         d -- <d>ecrease screen temperature [-500]
         r -- <r>ead screen temperature
         t -- <t>oggle temperature mode (on/off)
     Example:
-        $(basename ${0}) r       # Read the temperature value
-        $(basename ${0}) i       # Increase temperature by 500
-        $(basename ${0}) d       # Decrease temperature by 500
-        $(basename ${0}) t -q    # Toggle mode quietly
+        $(basename "${0}") r       # Read the temperature value
+        $(basename "${0}") i       # Increase temperature by 500
+        $(basename "${0}") d       # Decrease temperature by 500
+        $(basename "${0}") t -q    # Toggle mode quietly
 EOF
 }
 
-if [ $# -ge 1 ]; then
+if [[ $# -ge 1 ]]; then
     if [[ "$2" == *q* ]] || [[ "$3" == *q* ]]; then
 	    notify=false
     fi
