@@ -16,11 +16,11 @@ themeProf="${hydeThemeDir}/openrgb.orp"
 customCol="${cacheDir}/orp/${wppName}.conf"
 openrgbCol="$HOME/.config/OpenRGB/colors.conf"
 
-mapfile colors < <(cut -s -f 2 -d @ "${openrgbCol}" | cut -s -f 2 -d :)
+mapfile -t colors < <(cut -s -f 2 -d @ "${openrgbCol}" | cut -s -f 2 -d :)
 
 Adjust_Wallbash() {
-  monetSatCmd="monet -c $("${colors[*]}// / -c /g") -s 1"
-  mapfile saturated < <(eval "${monetSatCmd}")
+
+  mapfile -t saturated < <(monet $(printf -- "-c %s " "${colors[@]}") -s 1)
 
   oldSecondCol="${colors[3]}"
   newSecondCol="${saturated[3]}"
