@@ -1,45 +1,41 @@
-#!/usr/bin/env sh
+#!/usr/bin/bash
 # Script to apply wallpaper using swww
 
 #// lock instance
 
-lockFile="/tmp/hyde$(id -u)$(basename ${0}).lock"
+lockFile="/tmp/hyde$(id -u)$(basename "${0}").lock"
 [ -e "${lockFile}" ] && echo "An instance of the script is already running..." && exit 1
 touch "${lockFile}"
 trap 'rm -f ${lockFile}' EXIT
 
-
 #// define functions
 
-Wall_Cache()
-{       
-    ln -fs "${wallList[setIndex]}" "${wallSet}"
-    ln -fs "${wallList[setIndex]}" "${wallCur}"
-    "${scrDir}/swwwallcache.sh" -w "${wallList[setIndex]}" &> /dev/null
-    "${scrDir}/swwwallbash.sh" "${wallList[setIndex]}" &
-    ln -fs "${thmbDir}/${wallHash[setIndex]}.sqre" "${wallSqr}"
-    ln -fs "${thmbDir}/${wallHash[setIndex]}.thmb" "${wallTmb}"
-    ln -fs "${thmbDir}/${wallHash[setIndex]}.blur" "${wallBlr}"
-    ln -fs "${thmbDir}/${wallHash[setIndex]}.quad" "${wallQad}"
-    ln -fs "${dcolDir}/${wallHash[setIndex]}.dcol" "${wallDcl}"
+Wall_Cache() {
+  ln -fs "${wallList[setIndex]}" "${wallSet}"
+  ln -fs "${wallList[setIndex]}" "${wallCur}"
+  "${scrDir}/swwwallcache.sh" -w "${wallList[setIndex]}" &>/dev/null
+  "${scrDir}/swwwallbash.sh" "${wallList[setIndex]}" &
+  ln -fs "${thmbDir}/${wallHash[setIndex]}.sqre" "${wallSqr}"
+  ln -fs "${thmbDir}/${wallHash[setIndex]}.thmb" "${wallTmb}"
+  ln -fs "${thmbDir}/${wallHash[setIndex]}.blur" "${wallBlr}"
+  ln -fs "${thmbDir}/${wallHash[setIndex]}.quad" "${wallQad}"
+  ln -fs "${dcolDir}/${wallHash[setIndex]}.dcol" "${wallDcl}"
 }
 
-Wall_Change()
-{
-    curWall="$(set_hash "${wallSet}")"
-    for i in "${!wallHash[@]}" ; do
-        if [ "${curWall}" == "${wallHash[i]}" ] ; then
-            if [ "${1}" == "n" ] ; then
-                setIndex=$(( (i + 1) % ${#wallList[@]} ))
-            elif [ "${1}" == "p" ] ; then
-                setIndex=$(( i - 1 ))
-            fi
-            break
-        fi
-    done
-    Wall_Cache
+Wall_Change() {
+  curWall="$(set_hash "${wallSet}")"
+  for i in "${!wallHash[@]}"; do
+    if [ "${curWall}" == "${wallHash[i]}" ]; then
+      if [ "${1}" == "n" ]; then
+        setIndex=$(((i + 1) % ${#wallList[@]}))
+      elif [ "${1}" == "p" ]; then
+        setIndex=$((i - 1))
+      fi
+      break
+    fi
+  done
+  Wall_Cache
 }
-
 
 #// set variables
 
@@ -53,7 +49,6 @@ wallBlr="${cacheDir}/wall.blur"
 wallQad="${cacheDir}/wall.quad"
 wallDcl="${cacheDir}/wall.dcol"
 
-
 #// check wall
 
 setIndex=0
@@ -63,51 +58,48 @@ wallPathArray+=("${wallAddCustomPath[@]}")
 get_hashmap "${wallPathArray[@]}"
 [ ! -e "$(readlink -f "${wallSet}")" ] && echo "fixig link :: ${wallSet}" && ln -fs "${wallList[setIndex]}" "${wallSet}"
 
-
 #// evaluate options
 
-while getopts "nps:" option ; do
-    case $option in
-    n ) # set next wallpaper
-        xtrans="grow"
-        Wall_Change n
-        ;;
-    p ) # set previous wallpaper
-        xtrans="outer"
-        Wall_Change p
-        ;;
-    s ) # set input wallpaper
-        if [ ! -z "${OPTARG}" ] && [ -f "${OPTARG}" ] ; then
-            get_hashmap "${OPTARG}"
-        fi
-        Wall_Cache
-        ;;
-    * ) # invalid option
-        echo "... invalid option ..."
-        echo "$(basename "${0}") -[option]"
-        echo "n : set next wall"
-        echo "p : set previous wall"
-        echo "s : set input wallpaper"
-        exit 1 ;;
-    esac
+while getopts "nps:" option; do
+  case $option in
+  n) # set next wallpaper
+    xtrans="grow"
+    Wall_Change n
+    ;;
+  p) # set previous wallpaper
+    xtrans="outer"
+    Wall_Change p
+    ;;
+  s) # set input wallpaper
+    if [ -n "${OPTARG}" ] && [ -f "${OPTARG}" ]; then
+      get_hashmap "${OPTARG}"
+    fi
+    Wall_Cache
+    ;;
+  *) # invalid option
+    echo "... invalid option ..."
+    echo "$(basename "${0}") -[option]"
+    echo "n : set next wall"
+    echo "p : set previous wall"
+    echo "s : set input wallpaper"
+    exit 1
+    ;;
+  esac
 done
-
 
 #// check swww daemon
 
-swww query &> /dev/null
-if [ $? -ne 0 ] ; then
-    swww-daemon --format xrgb &
-    swww query && swww restore
+swww query &>/dev/null
+if [ $? -ne 0 ]; then
+  swww-daemon --format xrgb &
+  swww query && swww restore
 fi
-
 
 #// set defaults
 
 [ -z "${xtrans}" ] && xtrans="grow"
 [ -z "${wallFramerate}" ] && wallFramerate=60
 [ -z "${wallTransDuration}" ] && wallTransDuration=0.4
-
 
 #// apply wallpaper
 echo ":: applying wall :: \"$(readlink -f "${wallSet}")\""
