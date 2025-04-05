@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/bash
 # Script to handle wallpaper selection using rofi
 
 #// set variables
@@ -40,9 +40,9 @@ rofiSel=$(parallel --link echo -en "\$(basename "{1}")"'\\x00icon\\x1f'"${thmbDi
 
 #// apply wallpaper
 
-if [ ! -z "${rofiSel}" ] ; then
+if [ -n "${rofiSel}" ] ; then
     for i in "${!wallPathArray[@]}" ; do
-        setWall="$(find "${wallPathArray[i]}/" -type f -name "${rofiSel}")"
+        setWall="$(find -L "${wallPathArray[i]}/" -type f -name "${rofiSel}")"
         [ -z "${setWall}" ] || break
     done
     "${scrDir}/swwwallpaper.sh" -s "${setWall}"
