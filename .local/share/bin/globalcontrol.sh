@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/bash
 
 # HYDE-CLI
 export CLI_PATH=$(dirname $(dirname ${0}))
@@ -43,8 +43,7 @@ source_user() {
     [ -f "${hydeConfDir}/hyde.conf" ] && . "${hydeConfDir}/hyde.conf"
 }
 
-get_hashmap()
-{
+get_hashmap() {
     unset wallHash
     unset wallList
     unset skipStrays
@@ -55,34 +54,39 @@ get_hashmap()
         [ "${wallSource}" == "--skipstrays" ] && skipStrays=1 && continue
         [ "${wallSource}" == "--verbose" ] && verboseMap=1 && continue
 
-        if [ "${wallSource}" == "${hydeConfDir}/themes" ] ; then
-            while read thmDir ; do
-                thmHashMap=$(find "${thmDir}/" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec "${hashMech}" {} + | sort -k2)
-                
-                hashMap+="${thmHashMap}"$'\n'
-            done < <(find "${hydeConfDir}/themes" -mindepth 1 -maxdepth 1 \( -type d -o -type l \))
-        else
-            echo "${wallSource}"
-            if [[ -d "${wallSource}" ]] ; then
-                wallSource="${wallSource}/"
-            fi
+        supported_files=(
+            "gif"
+            "jpg"
+            "jpeg"
+            "png"
+        )
 
-            hashMap=$(find "${wallSource}" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec "${hashMech}" {} + | sort -k2)
-        fi
-        
-        if [ -z "${hashMap}" ] ; then
-            echo "WARNING: No image found in \"${wallSource}\""
+        supported_files+=("${WALLPAPER_FILETYPES=[@]}") # Add custom wallpaper types # ! this should conform to the backend
+
+        hashMap=$(
+            # shellcheck disable=SC2046
+            find -L "${wallSource}" -type f \
+                \( $(printf -- "-iname *.%s -o " "${supported_files[@]}" | sed 's/ -o $//') \) ! -path "*/logo/*" \
+                -exec "${hashMech}" {} + 2>/dev/null |
+                sort -k2
+        )
+        # hashMap=$(
+        # find "${wallSource}" -type f \( -iname "*.gif" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.mkv"  \) ! -path "*/logo/*" -exec "${hashMech}" {} + | sort -k2
+        # )
+
+        if [ -z "${hashMap}" ]; then
+            notify-send -a "HyDE Alert" "WARNING: No compatible wallpapers found in \"${wallSource}\""
             continue
         fi
 
-        while read -r hash image ; do
+        while read -r hash image; do
             wallHash+=("${hash}")
             wallList+=("${image}")
-        done <<< "${hashMap}"
+        done <<<"${hashMap}"
     done
 
-    if [ -z "${#wallList[@]}" ] || [[ "${#wallList[@]}" -eq 0 ]] ; then
-        if [[ "${skipStrays}" -eq 1 ]] ; then
+    if [ -z "${#wallList[@]}" ] || [[ "${#wallList[@]}" -eq 0 ]]; then
+        if [[ "${skipStrays}" -eq 1 ]]; then
             return 1
         else
             echo "ERROR: No image found in any source"
@@ -90,16 +94,16 @@ get_hashmap()
         fi
     fi
 
-    if [[ "${verboseMap}" -eq 1 ]] ; then
+    if [[ "${verboseMap}" -eq 1 ]]; then
         echo "// Hash Map //"
-        for indx in "${!wallHash[@]}" ; do
+        for indx in "${!wallHash[@]}"; do
             echo ":: \${wallHash[${indx}]}=\"${wallHash[indx]}\" :: \${wallList[${indx}]}=\"${wallList[indx]}\""
         done
     fi
 }
 
-get_themes()
-{
+# shellcheck disable=SC2120
+get_themes() {
     unset thmSortS
     unset thmListS
     unset thmWallS
@@ -107,26 +111,28 @@ get_themes()
     unset thmList
     unset thmWall
 
-    while read thmDir ; do
-        if [ ! -e "$(readlink "${thmDir}/wall.set")" ] ; then
+    while read -r thmDir; do
+        local realWallPath
+        realWallPath="$(readlink "${thmDir}/wall.set")"
+        if [ ! -e "${realWallPath}" ]; then
             get_hashmap "${thmDir}" --skipstrays || continue
-            echo "fixig link :: ${thmDir}/wall.set"
+            echo "fixing link :: ${thmDir}/wall.set"
             ln -fs "${wallList[0]}" "${thmDir}/wall.set"
         fi
         [ -f "${thmDir}/.sort" ] && thmSortS+=("$(head -1 "${thmDir}/.sort")") || thmSortS+=("0")
-        thmListS+=("$(basename "${thmDir}")")
-        thmWallS+=("$(readlink "${thmDir}/wall.set")")
-    done < <(find "${hydeConfDir}/themes" -mindepth 1 -maxdepth 1 \( -type d -o -type l \))
+        thmWallS+=("${realWallPath}")
+        thmListS+=("${thmDir##*/}") # Use this instead of basename
+    done < <(find "${hydeConfDir}/themes" -mindepth 1 -maxdepth 1 -type d)
 
-    while IFS='|' read -r sort theme wall ; do
+    while IFS='|' read -r sort theme wall; do
         thmSort+=("${sort}")
         thmList+=("${theme}")
         thmWall+=("${wall}")
-    done < <(parallel --link echo "{1}\|{2}\|{3}" ::: "${thmSortS[@]}" ::: "${thmListS[@]}" ::: "${thmWallS[@]}" | sort -n -k 1 -k 2)
-
-    if [ "${1}" == "--verbose" ] ; then
+    done < <(paste -d '|' <(printf "%s\n" "${thmSortS[@]}") <(printf "%s\n" "${thmListS[@]}") <(printf "%s\n" "${thmWallS[@]}") | sort -n -k 1 -k 2)
+    #!  done < <(parallel --link echo "{1}\|{2}\|{3}" ::: "${thmSortS[@]}" ::: "${thmListS[@]}" ::: "${thmWallS[@]}" | sort -n -k 1 -k 2) # This is overkill and slow
+    if [ "${1}" == "--verbose" ]; then
         echo "// Theme Control //"
-        for indx in "${!thmList[@]}" ; do
+        for indx in "${!thmList[@]}"; do
             echo -e ":: \${thmSort[${indx}]}=\"${thmSort[indx]}\" :: \${thmList[${indx}]}=\"${thmList[indx]}\" :: \${thmWall[${indx}]}=\"${thmWall[indx]}\""
         done
     fi
