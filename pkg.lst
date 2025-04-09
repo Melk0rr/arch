@@ -89,6 +89,7 @@ glow
 oh-my-posh-bin
 translate-shell
 rclone-git
+ripgrep
 rsync
 stow
 yazi
