@@ -126,7 +126,7 @@ if status is-interactive
 	abbr install-date 'stat -c %w / | cut -b 1-16'
 
 	# Fastfetch
-	abbr ff 'fastfetch'
+	abbr ffe 'fastfetch'
 
 	# Process and journals
 	abbr psa 'ps auxf'
@@ -153,10 +153,11 @@ if status is-interactive
 	alias lt='eza -aT --color=always --group-directories-first --icons'
 
 	# NOTE: Arch / Pacman specific
-	abbr clean-arch 'yay -Sc && yay -Yc'
-	abbr clean-orphans 'pacman -Qtdq | sudo pacman -Rns -'
-	abbr uninstall 'sudo pacman -Rns'
-  abbr rebuild 'yay -S --answerclean All --rebuild'
+	abbr ca 'yay -Sc && yay -Yc'
+	abbr co 'pacman -Qtdq | sudo pacman -Rns -'
+	abbr un 'sudo pacman -Rns'
+  abbr re 'yay -S --answerclean All --rebuild'
+  abbr fp 'pacman -Q | fzf'
 	abbr update-mirrors 'sudo reflector --verbose --score 100 --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist'
 	abbr fix-key 'sudo rm /var/lib/pacman/sync/* && sudo rm -rf /etc/pacman.d/gnupg/* && sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman --noconfirm -Su'
 	abbr chroot-build 'mkdir -p ~/Documents/chroot/; set CHROOT $HOME/Documents/chroot; mkarchroot $CHROOT/root base-devel; makechrootpkg -c -r $CHROOT'
