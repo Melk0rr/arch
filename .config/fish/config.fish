@@ -1,3 +1,4 @@
+# @fish-lsp-disable 4004
 # Applications
 set -gx EDITOR 'nvim'
 set -gx TERMINAL 'ghostty'
@@ -26,7 +27,7 @@ if status is-interactive
 	end
 
 	function histop
-		history | awk '{print $2}' | sort | uniq -c | sort -nr | head -10
+		history | awk "{print \$2}" | sort | uniq -c | sort -nr | head -10
 	end
 
 	# Clear fish history
@@ -113,13 +114,46 @@ if status is-interactive
 		end
 	end
 
+  # Rebuilds the hyprland environment
+  function rebuild-hypr
+    set -l hyprpkgs "hyprland-git" "hyprlang-git" "hyprutils-git" "aquamarine-git" "hyprcursor-git" "hyprland-protocols-git" "hyprgraphics-git" "hyprland-qtutils-git" "hypridle-git" "hyprlock-git" "hyprsunset-git"
+    set -l installed []
+
+    for package in $hyprpkgs
+      if [ (pacman -Qi $package) ]
+        set installed $installed $package
+      end
+    end
+
+    if [ (count $installed) -eq 0 ]
+      echo "No packages to rebuild"
+      return 1
+    end
+    
+    yay -S --answerclean All --rebuild (string join " " $installed)
+  end
+
 	# Fish greeting message
 	function fish_greeting
 	end
+  
+  # Grep color
+  function grep; grep --color $argv; end
+
+  # Plocate
+  function locate; plocate $argv; end
+
+	# LS
+  function ls; eza -la --color=always --group-directories-first --icons $argv; end
+  function la; eza -a --color=always --group-directories-first --icons $argv; end
+  function ll; eza -l --color=always --group-directories-first --icons $argv; end
+  function lt; eza -aT --color=always --group-directories-first --icons $argv; end
+
+  # Dev
+  function py; python3 $argv; end
 
 	############# Aliases & Abbreviations ############# 
   # alias vim='nvim'
-	alias grep='grep --color'
 
   # NOTE: General system monitoring / maintenance
 	# Install date
@@ -135,9 +169,6 @@ if status is-interactive
 	abbr jctl 'journalctl -p 3 -xb'
 	abbr lsblk 'lsblk -o +uuid,name'
 
-	# PLocate
-	alias locate='plocate'
-
 	# Patching
 	abbr patch-file 'diff -Naru'
 	abbr patch-dir 'diff -crB'
@@ -146,21 +177,16 @@ if status is-interactive
 	abbr dnstls-opt 'sudo sed -i "/^DNSOverTLS=/c\DNSOverTLS=opportunistic" /etc/systemd/resolved.conf; sudo systemctl restart systemd-resolved'
 	abbr dnstls-yes 'sudo sed -i "/^DNSOverTLS=/c\DNSOverTLS=yes" /etc/systemd/resolved.conf; sudo systemctl restart systemd-resolved'
 
-	# LS
-	alias ls='eza -la --color=always --group-directories-first --icons'
-	alias la='eza -a --color=always --group-directories-first --icons'
-	alias ll='eza -l --color=always --group-directories-first --icons'
-	alias lt='eza -aT --color=always --group-directories-first --icons'
 
 	# NOTE: Arch / Pacman specific
-	abbr ca 'yay -Sc && yay -Yc'
-	abbr co 'pacman -Qtdq | sudo pacman -Rns -'
-	abbr un 'sudo pacman -Rns'
+  abbr un 'sudo pacman -Rns'
   abbr re 'yay -S --answerclean All --rebuild'
   abbr fp 'pacman -Q | fzf'
+	abbr clean-arch 'yay -Sc && yay -Yc'
+	abbr clean-orphans 'pacman -Qtdq | sudo pacman -Rns -'
 	abbr update-mirrors 'sudo reflector --verbose --score 100 --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist'
 	abbr fix-key 'sudo rm /var/lib/pacman/sync/* && sudo rm -rf /etc/pacman.d/gnupg/* && sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman --noconfirm -Su'
-	abbr chroot-build 'mkdir -p ~/Documents/chroot/; set CHROOT $HOME/Documents/chroot; mkarchroot $CHROOT/root base-devel; makechrootpkg -c -r $CHROOT'
+	abbr chroot-build "mkdir -p ~/Documents/chroot/; set CHROOT \$HOME/Documents/chroot; mkarchroot \$CHROOT/root base-devel; makechrootpkg -c -r \$CHROOT"
 
   # NOTE: Dev
 
@@ -182,7 +208,6 @@ if status is-interactive
 	abbr gre 'git rebase'
 
 
-	alias py='python3'
 
   # NOTE: QoL
 	# Zoxide
