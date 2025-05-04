@@ -41,6 +41,7 @@ OpenRGB_Wallbash() {
   # If there is a custom profile : use it
   if [[ -f $customCol ]]; then
     col="${customCol}"
+    cp -f "${customCol}" "${openrgbCol}"
 
   else
     Adjust_Wallbash
