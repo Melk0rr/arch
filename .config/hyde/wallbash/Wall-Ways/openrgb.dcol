@@ -7,9 +7,9 @@ $HOME/.config/OpenRGB/colors.conf|${scrDir}/openrgb.sh g
 <wallbash_1xa5>
 # 1: Corsair Vengeance Pro RGB
 <wallbash_4xa5>
-# 2: ASUS ROG CROSSHAIR VIII HERO
-<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_1xa5>
-# 3: G903 LIGHTSPEED Wireless Gaming Mouse w/ HERO
-<wallbash_4xa5>
-# 4: Lian Li GAII Trinity
+# 2: NZXT Kraken 2024 ELITE Series RGB
 <wallbash_1xa5>
+# 3: ASUS ROG CROSSHAIR VIII HERO
+<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_1xa5>
+# 4: G903 LIGHTSPEED Wireless Gaming Mouse w/ HERO
+<wallbash_4xa5>
