@@ -3,7 +3,7 @@
 scrDir="$(dirname "$(realpath "$0")")"
 source "${scrDir}/globalcontrol.sh"
 
-# devices=($( openrgb -l | grep '^[0-9]: ' ))
+# Retrieves the devices detected by OpenRGB
 mapfile -t devices < <(openrgb -l | grep '^[0-9]: ')
 
 mode="wallbash"
@@ -56,22 +56,28 @@ OpenRGB_Wallbash() {
   deviceList=("${devices[@]}")
 
   i=0
+  # Read the lines of the config file
   while read -r line; do
+    # The lines that begin with '#' are the ones specifying a device
     if [[ $line =~ ^# ]]; then
       read -r line1
 
+      # Extract device name from the line
       devName=$(echo "$line" | cut -s -f 2 -d :)
       devStr=$(
         IFS=$'\n'
         echo "${deviceList[*]}"
       )
-      mapfile -t devSearch < <(echo "${devStr}" | grep "${devName}")
 
+      # Searches for this device in the OpenRGB device list
+      mapfile -t devSearch < <(echo "${devStr}" | grep "${devName}")
       device=${devSearch[0]}
 
       if [[ -n $device ]]; then
+        # Removes the device from device list to optimize further searches
         deviceList=("${deviceList[@]/$device/}")
 
+        # Retrieves the device ID from the device found from OpenRGB devices
         devId=$(echo "$device" | cut -s -f 1 -d :)
         openrgbCmd+=" -d ${devId} -c ${line1} -m Direct"
       fi
