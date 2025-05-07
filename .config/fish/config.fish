@@ -1,4 +1,4 @@
-# @fish-lsp-disable 4004
+# @fish-lsp-disable 4004 2002
 # Applications
 set -gx EDITOR 'nvim'
 set -gx TERMINAL 'ghostty'
@@ -136,26 +136,20 @@ if status is-interactive
 	# Fish greeting message
 	function fish_greeting
 	end
-  
-  # Grep color
-  function grep; grep --color $argv; end
-
-  # Plocate
-  function locate; plocate $argv; end
-
-	# LS
-  function ls; eza -la --color=always --group-directories-first --icons $argv; end
-  function la; eza -a --color=always --group-directories-first --icons $argv; end
-  function ll; eza -l --color=always --group-directories-first --icons $argv; end
-  function lt; eza -aT --color=always --group-directories-first --icons $argv; end
-
-  # Dev
-  function py; python3 $argv; end
 
 	############# Aliases & Abbreviations ############# 
-  # alias vim='nvim'
 
   # NOTE: General system monitoring / maintenance
+
+  alias grep 'grep --color'
+  alias locate 'plocate'
+
+  # LS
+  alias ls 'eza -la --color=always --group-directories-first --icons'
+  alias la 'eza -a --color=always --group-directories-first --icons'
+  alias ll 'eza -l --color=always --group-directories-first --icons'
+  alias lt 'eza -aT --color=always --group-directories-first --icons'
+
 	# Install date
 	abbr install-date 'stat -c %w / | cut -b 1-16'
 
@@ -177,7 +171,6 @@ if status is-interactive
 	abbr dnstls-opt 'sudo sed -i "/^DNSOverTLS=/c\DNSOverTLS=opportunistic" /etc/systemd/resolved.conf; sudo systemctl restart systemd-resolved'
 	abbr dnstls-yes 'sudo sed -i "/^DNSOverTLS=/c\DNSOverTLS=yes" /etc/systemd/resolved.conf; sudo systemctl restart systemd-resolved'
 
-
 	# NOTE: Arch / Pacman specific
   abbr un 'sudo pacman -Rns'
   abbr re 'yay -S --answerclean All --rebuild'
@@ -189,6 +182,8 @@ if status is-interactive
 	abbr chroot-build "mkdir -p ~/Documents/chroot/; set CHROOT \$HOME/Documents/chroot; mkarchroot \$CHROOT/root base-devel; makechrootpkg -c -r \$CHROOT"
 
   # NOTE: Dev
+
+  alias py 'python3'
 
 	# Git & dev
 	abbr gin 'git init'
