@@ -195,7 +195,7 @@ if status is-interactive
 	abbr gss 'git status --short'
 	abbr gst 'git stash'
 	abbr gp 'git push'
-	abbr gp 'git push --set-upstream origin'
+	abbr gps 'git push --set-upstream origin'
 	abbr gpl 'git pull'
 	abbr gdi 'git diff'
 	abbr gmr 'git merge'
