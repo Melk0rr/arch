@@ -1,3 +1,6 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = https://github.com/Melk0rr/nvim.git
+[submodule ".local/share/bin"]
+	path = .local/share/bin
+	url = https://github.com/Melk0rr/shellscripts.git
