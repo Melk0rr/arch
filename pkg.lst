@@ -136,6 +136,7 @@ python-pip
 python-pipx
 rust
 rust-analyzer
+valgrind
 vim
 
 # --------------------------------------------------- // Applications
