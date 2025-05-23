@@ -1,3 +1,5 @@
+[tool.ruff]
 line-length = 100
-# indent-width = 2
+
+[tool.ruff.lint]
 select = ['E', 'F', 'W', 'A', 'PLC', 'PLE', 'PLW', 'I']
