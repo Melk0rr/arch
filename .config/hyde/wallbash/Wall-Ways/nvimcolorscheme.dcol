@@ -95,6 +95,8 @@ return {
       require("tokyonight").setup({
         on_colors = function (colors)
           colors.bg = "#<wallbash_pry1>"
+          colors.bg_float = "#<wallbash_pry1>"
+          colors.bg_sidebar = "#<wallbash_pry1>"
         end
       })
     end
