@@ -2,3 +2,10 @@ line-length = 100
 
 [lint]
 select = ['E', 'F', 'W', 'A', 'PLC', 'PLE', 'PLW', 'I']
+ignore = ["D200", "D202", "D212", "E111", "E114", "E121", "E202", "E203", "E501", "E221", "W503", "E241", "E402"]
+
+[lint.pycodestyle]
+max-line-length = 100
+
+[format]
+docstring-code-format = true
