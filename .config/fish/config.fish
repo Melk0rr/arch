@@ -223,7 +223,7 @@ if status is-interactive
   abbr re 'yay -S --answerclean All --rebuild'
 	abbr cln-pkg 'yay -Sc && yay -Yc'
 	abbr cln-orph 'pacman -Qtdq | sudo pacman -Rns -'
-	abbr upd-mirrors'sudo reflector --verbose --score 100 --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist'
+	abbr upd-mirrors 'sudo reflector --verbose --score 100 --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist'
 	abbr fix-key 'sudo rm /var/lib/pacman/sync/* && sudo rm -rf /etc/pacman.d/gnupg/* && sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman --noconfirm -Su'
 	abbr chrbuild "mkdir -p ~/Documents/chroot/; set CHROOT \$HOME/Documents/chroot; mkarchroot \$CHROOT/root base-devel; makechrootpkg -c -r \$CHROOT"
   abbr paclog 'cat /var/log/pacman.log'
