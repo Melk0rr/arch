@@ -1,6 +1,7 @@
-# Applications
+# @fish-lsp-disable 4004 2002
+# NOTE: Applications
 set -gx EDITOR 'nvim'
-set -gx TERMINAL 'kitty'
+set -gx TERMINAL 'ghostty'
 
 # Commands to run in interactive sessions can go here
 if status is-interactive
@@ -26,12 +27,13 @@ if status is-interactive
 	end
 
 	function histop
-		history | awk '{print $2}' | sort | uniq -c | sort -nr | head -10
+		history | awk "{print \$2}" | sort | uniq -c | sort -nr | head -10
 	end
 
 	# Clear fish history
-	function clear-fish-history
+	function clr-fish-history
 		echo 'Clearing fish history...'
+
 		rm -fv ~/.local/share/fish/fish_history
 		sudo rm -fv /root/.local/share/fish/fish_history
 		rm -fv ~/.config/fish/fish_history
@@ -39,7 +41,7 @@ if status is-interactive
 	end
 
 	# Empty trash directories
-	function empty-trash
+	function clr-trash
 		echo 'Emptying trash...'
 		
 		# Global trash
@@ -48,22 +50,25 @@ if status is-interactive
 	end
 
 	# Clear temporary files
-	function clear-temp
+	function clr-temp
 		echo 'Clearing temporary files...'
+
 		sudo rm -rfv /tmp/*
 		sudo rm -rfv /var/tmp/*
 	end
 
 	# Clear crash reports
-	function clear-crash-reports
+	function clr-crash-reports
 		echo 'Clearing crash reports...'
+
 		sudo rm -rfv /var/crash/*
 		sudo rm -rfv /var/lib/systemd/coredump/
 	end
 
 	# Clear system logs
-	function clear-syslogs
+	function clr-syslogs
 		echo 'Clearing system logs...'
+
 		if ! command -v 'journalctl' &> /dev/null
 			echo 'Skipping because journalctl was not found'
 		else
@@ -74,28 +79,29 @@ if status is-interactive
 		sudo rm -rfv /var/log/journal/*
 	end
 
-	# Combined cleanup
-	function cleanup
-		empty-trash
-		clear-temp
-		clear-crash-reports
-		clear-syslogs
+	# Combine cleanup
+	function clr-all
+		clr-trash
+		clr-temp
+		clr-crash-reports
+		clr-syslogs
 	end
 
 	function lsupd
 		echo "* Official updates *"
 		checkupdates
+
 		echo -e "\n* AUR Updates *"
 		yay -Qua
 	end
 
 	# Create a backup of the given file
-	function backup-file --argument filename
+	function bakfile --argument filename
 		sudo cp $filename $filename.bak
 	end
 
 	# Copy file
-	function copy
+	function cp-file
 		set count (count $argv | tr -d \n)
 		if test "$count" = 2; and test -d "$argv[1]"
 			set from (echo $argv[1] | trim-right /)
@@ -113,57 +119,126 @@ if status is-interactive
 		end
 	end
 
+  # Compile mesa-tkg
+  function mk-mesatkg
+    set oldir (pwd)
+    set tkgpath ~/Projects/dev/sh/tkg
+    if test ! -d $tkgpath
+      mkdir -p $tkgpath
+    end
+
+    cd $tkgpath
+
+    if test ! -d $tkgpath/mesa-git
+      git clone "https://github.com/Frogging-Family/mesa-git.git"
+    end
+
+    cd mesa-git
+    git pull
+    makepkg -si
+
+    cd $oldir
+  end
+
+  # Compile linux-tkg kernel
+  function mk-linuxtkg
+    set oldir (pwd)
+    set tkgpath ~/Projects/dev/sh/tkg
+    if test ! -d $tkgpath
+      mkdir -p $tkgpath
+    end
+
+    cd $tkgpath
+
+    if test ! -d $tkgpath/linux-tkg
+      git clone "https://github.com/Frogging-Family/linux-tkg.git"
+    end
+
+    cd linux-tkg
+    git pull
+    makepkg -si
+
+    cd $oldir
+  end
+
+  # Rebuild the hyprland environment
+  function hypr-re
+    set -l hyprpkgs "hyprland-git" "hyprlang-git" "hyprutils-git" "aquamarine-git" "hyprcursor-git" "hyprland-protocols-git" "hyprgraphics-git" "hyprland-qtutils-git" "hypridle-git" "hyprlock-git" "hyprsunset-git"
+    set -l installed []
+
+    for package in $hyprpkgs
+      if [ (pacman -Qi $package) ]
+        set installed $installed $package
+      end
+    end
+
+    if [ (count $installed) -eq 0 ]
+      echo "No packages to rebuild"
+      return 1
+    end
+    
+    yay -S --answerclean All --rebuild (string join " " $installed)
+  end
+
 	# Fish greeting message
 	function fish_greeting
 	end
 
 	############# Aliases & Abbreviations ############# 
-  # alias vim='nvim'
-	alias grep='grep --color'
 
-	# Install date
-	abbr install-date 'stat -c %w / | cut -b 1-16'
+  # NOTE: General system monitoring / maintenance
 
-	# Fastfetch
-	abbr ff 'fastfetch'
+  alias grep 'grep --color'
+  alias locate 'plocate'
 
-	# Process and journals
+  # NOTE: LS
+  alias ls 'eza -la --color=always --group-directories-first --icons'
+  alias la 'eza -a --color=always --group-directories-first --icons'
+  alias ll 'eza -l --color=always --group-directories-first --icons'
+  alias lt 'eza -aT --color=always --group-directories-first --icons'
+
+	# NOTE: Install date
+	abbr instdate 'stat -c %w / | cut -b 1-16'
+
+	# NOTE: Fastfetch
+	abbr ffe 'fastfetch'
+
+	# NOTE: Process and journals
 	abbr psa 'ps auxf'
 	abbr psmem 'ps auxf | sort -nr -k 4'
 	abbr pscpu 'ps auxf | sort -nr -k 3'
 	abbr jctl 'journalctl -p 3 -xb'
-
-	# Patching
-	abbr patch-file 'diff -Naru'
-	abbr patch-dir 'diff -crB'
-
-	# LS
-	alias ls='eza -la --color=always --group-directories-first --icons'
-	alias la='eza -a --color=always --group-directories-first --icons'
-	alias ll='eza -l --color=always --group-directories-first --icons'
-	alias lt='eza -aT --color=always --group-directories-first --icons'
-
-	# PLocate
-	alias locate='plocate'
-
-	# Pacman
-	# abbr list-updates 'checkupdates; yay -Qua'
-	abbr clean-arch 'yay -Sc && yay -Yc'
-	abbr clean-orphans 'pacman -Qtdq | sudo pacman -Rns -'
-	abbr uninstall 'sudo pacman -Rns'
-	abbr update-mirrors 'sudo reflector --verbose --score 100 --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist'
-	abbr fix-key 'sudo rm /var/lib/pacman/sync/* && sudo rm -rf /etc/pacman.d/gnupg/* && sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman --noconfirm -Su'
-	abbr chroot-build 'mkdir -p ~/Documents/chroot/; set CHROOT $HOME/Documents/chroot; mkarchroot $CHROOT/root base-devel; makechrootpkg -c -r $CHROOT'
 	abbr lsblk 'lsblk -o +uuid,name'
-	
-	#DNS
+
+	# NOTE: Patching
+	abbr patchf 'diff -Naru'
+	abbr patchd 'diff -crB'
+
+	# NOTE: DNS
 	abbr dnstls-opt 'sudo sed -i "/^DNSOverTLS=/c\DNSOverTLS=opportunistic" /etc/systemd/resolved.conf; sudo systemctl restart systemd-resolved'
 	abbr dnstls-yes 'sudo sed -i "/^DNSOverTLS=/c\DNSOverTLS=yes" /etc/systemd/resolved.conf; sudo systemctl restart systemd-resolved'
 
-	# Rclone
-	abbr rcc 'rclone copy'
+	# NOTE: Arch / Pacman specific
+  abbr un 'sudo pacman -Rns'
+  abbr re 'yay -S --answerclean All --rebuild'
+	abbr clean-pkg 'yay -Sc && yay -Yc'
+	abbr clean-orphans 'pacman -Qtdq | sudo pacman -Rns -'
+	abbr upd-mirrors 'sudo reflector --verbose --score 100 --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist'
+	abbr fix-key 'sudo rm /var/lib/pacman/sync/* && sudo rm -rf /etc/pacman.d/gnupg/* && sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman --noconfirm -Su'
+	abbr chrbuild "mkdir -p ~/Documents/chroot/; set CHROOT \$HOME/Documents/chroot; mkarchroot \$CHROOT/root base-devel; makechrootpkg -c -r \$CHROOT"
+  abbr paclog 'cat /var/log/pacman.log'
+  abbr pacfp 'pacman -Q | fzf'
 
-	# Git & dev
+  # NOTE: Hyprland
+  abbr hyprlog 'cat $XDG_RUNTIME_DIR/hypr/$(ls -t $XDG_RUNTIME_DIR/hypr/ | head -n 1)/hyprland.log'
+  abbr hyprlogl 'cat $XDG_RUNTIME_DIR/hypr/$(ls -r $XDG_RUNTIME_DIR/hypr/ | head -n 2 | tail -n 1)/hyprland.log'
+  abbr hyprcl 'hyprctl clients'
+
+  # NOTE: Dev
+  alias py 'python3'
+  abbr clr-nswap 'rm -rfv ~/.local/state/nvim/swap/*'
+
+	# NOTE:  Git
 	abbr gin 'git init'
 	abbr gcl 'git clone'
 	abbr gcm 'git commit -m'
@@ -171,25 +246,30 @@ if status is-interactive
 	abbr gaa 'git add --all'
 	abbr gs 'git status'
 	abbr gss 'git status --short'
+  abbr gm 'git submodule'
+  abbr gma 'git submodule add'
+  abbr gmu 'git submodule update --remote'
 	abbr gst 'git stash'
 	abbr gp 'git push'
+	abbr gps 'git push --set-upstream origin'
 	abbr gpl 'git pull'
 	abbr gdi 'git diff'
-	abbr gmr 'git merge'
+	abbr gy 'git merge'
 	abbr gco 'git checkout'
 	abbr gb 'git branch'
 	abbr gre 'git rebase'
+	abbr gra 'git remote add origin'
 
-	# yt-dlp
+  # NOTE: QoL
+	# NOTE: Zoxide
+	zoxide init --cmd cd fish | source
+
+	# NOTE: YT-DLP
 	abbr ytdl 'yt-dlp --output "%(title)s.%(ext)s"'
 	abbr ytdlp 'yt-dlp --audio-format mp3 -i --output "%(playlist_index)s-%(title)s.%(ext)s"'
 	abbr ytdla 'yt-dlp --audio-format mp3 -i -x -f bestaudio/best --output "%(playlist_index)s-%(title)s.%(ext)s"'
 
-	alias py='python3'
-
-
-	# Zoxide
-	zoxide init --cmd cd fish | source
-
+	# NOTE: Rclone
+	abbr rcc 'rclone copy'
 end
 # End of interactive mode
