@@ -190,6 +190,7 @@ if status is-interactive
 
   alias grep 'grep --color'
   alias locate 'plocate'
+  alias find 'fd'
 
   # NOTE: LS
   alias ls 'eza -la --color=always --group-directories-first --icons'
@@ -219,15 +220,15 @@ if status is-interactive
 	abbr dnstls-yes 'sudo sed -i "/^DNSOverTLS=/c\DNSOverTLS=yes" /etc/systemd/resolved.conf; sudo systemctl restart systemd-resolved'
 
 	# NOTE: Arch / Pacman specific
-  abbr un 'sudo pacman -Rns'
-  abbr re 'yay -S --answerclean All --rebuild'
-	abbr clean-pkg 'yay -Sc && yay -Yc'
-	abbr clean-orphans 'pacman -Qtdq | sudo pacman -Rns -'
-	abbr upd-mirrors 'sudo reflector --verbose --score 100 --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist'
-	abbr fix-key 'sudo rm /var/lib/pacman/sync/* && sudo rm -rf /etc/pacman.d/gnupg/* && sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman --noconfirm -Su'
-	abbr chrbuild "mkdir -p ~/Documents/chroot/; set CHROOT \$HOME/Documents/chroot; mkarchroot \$CHROOT/root base-devel; makechrootpkg -c -r \$CHROOT"
+  abbr pacremove 'sudo pacman -Rns'
+  abbr pacrebuild 'yay -S --answerclean All --rebuild'
+	abbr pacclean 'yay -Sc && yay -Yc'
+	abbr pacorphans 'pacman -Qtdq | sudo pacman -Rns -'
+	abbr pacmirrors 'sudo reflector --verbose --score 100 --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist'
+  abbr packey 'sudo rm /var/lib/pacman/sync/* && sudo rm -rf /etc/pacman.d/gnupg/* && sudo pacman-key --init && sudo pacman-key --populate && sudo pacman -Sy --noconfirm archlinux-keyring && sudo pacman --noconfirm -Su'
   abbr paclog 'cat /var/log/pacman.log'
-  abbr pacfp 'pacman -Q | fzf'
+  abbr pacfindpkg 'pacman -Q | fzf'
+  abbr pacchrootpkg "mkdir -p ~/Documents/chroot/; set CHROOT \$HOME/Documents/chroot; mkarchroot \$CHROOT/root base-devel; makechrootpkg -c -r \$CHROOT"
 
   # NOTE: Hyprland
   abbr hyprlog 'cat $XDG_RUNTIME_DIR/hypr/$(ls -t $XDG_RUNTIME_DIR/hypr/ | head -n 1)/hyprland.log'
@@ -236,7 +237,7 @@ if status is-interactive
 
   # NOTE: Dev
   alias py 'python3'
-  abbr clr-nswap 'rm -rfv ~/.local/state/nvim/swap/*'
+  abbr nvimswap 'rm -rfv ~/.local/state/nvim/swap/*'
 
 	# NOTE:  Git
 	abbr gin 'git init'
