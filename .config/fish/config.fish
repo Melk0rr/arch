@@ -231,7 +231,7 @@ if status is-interactive
   abbr pacchrootpkg "mkdir -p ~/Documents/chroot/; set CHROOT \$HOME/Documents/chroot; mkarchroot \$CHROOT/root base-devel; makechrootpkg -c -r \$CHROOT"
 
   # NOTE: Hyprland
-  abbr hyprlog 'cat $XDG_RUNTIME_DIR/hypr/$(ls -t $XDG_RUNTIME_DIR/hypr/ | head -n 1)/hyprland.log'
+  abbr hyprlog 'cat $XDG_RUNTIME_DIR/hypr/$(ls $XDG_RUNTIME_DIR/hypr/ | head -n 1)/hyprland.log'
   abbr hyprlogl 'cat $XDG_RUNTIME_DIR/hypr/$(ls -r $XDG_RUNTIME_DIR/hypr/ | head -n 2 | tail -n 1)/hyprland.log'
   abbr hyprcl 'hyprctl clients'
 
