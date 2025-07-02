@@ -21,6 +21,7 @@ if status is-interactive
     fish_vi_key_bindings --no-erase insert
   end
 	
+  # NOTE: Utils & plugins init
 	oh-my-posh init fish --config ~/.config/oh-my-posh/omp.json | source
 	zoxide init --cmd cd fish | source
 
