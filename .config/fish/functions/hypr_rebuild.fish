@@ -14,6 +14,6 @@ function hypr_rebuild
     return 1
   end
   
-  yay -S --answerclean All --rebuild (string join " " $installed)
+  yay -S --answerclean All --rebuild $installed
 end
 
