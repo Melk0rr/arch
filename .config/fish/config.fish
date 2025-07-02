@@ -22,166 +22,7 @@ if status is-interactive
   end
 	
 	oh-my-posh init fish --config ~/.config/oh-my-posh/omp.json | source
-
-	# Print fish history
-	function history
-		builtin history --show-time='%F %T'
-	end
-
-	function histop
-		history | awk "{print \$2}" | sort | uniq -c | sort -nr | head -10
-	end
-
-	# Clear fish history
-	function clr-fish-history
-		echo 'Clearing fish history...'
-
-		rm -fv ~/.local/share/fish/fish_history
-		sudo rm -fv /root/.local/share/fish/fish_history
-		rm -fv ~/.config/fish/fish_history
-		sudo rm -fv /root/.config/fish/fish_history
-	end
-
-	# Empty trash directories
-	function clr-trash
-		echo 'Emptying trash...'
-		
-		# Global trash
-		sudo rm -rfv ~/.local/share/Trash/*
-		sudo rm -rfv /root/.local/share/Trash/*
-	end
-
-	# Clear temporary files
-	function clr-temp
-		echo 'Clearing temporary files...'
-
-		sudo rm -rfv /tmp/*
-		sudo rm -rfv /var/tmp/*
-	end
-
-	# Clear crash reports
-	function clr-crash-reports
-		echo 'Clearing crash reports...'
-
-		sudo rm -rfv /var/crash/*
-		sudo rm -rfv /var/lib/systemd/coredump/
-	end
-
-	# Clear system logs
-	function clr-syslogs
-		echo 'Clearing system logs...'
-
-		if ! command -v 'journalctl' &> /dev/null
-			echo 'Skipping because journalctl was not found'
-		else
-			sudo journalctl --vacuum-time=1s
-		end
-
-		sudo rm -rfv /run/log/journal/*
-		sudo rm -rfv /var/log/journal/*
-	end
-
-	# Combine cleanup
-	function clr-all
-		clr-trash
-		clr-temp
-		clr-crash-reports
-		clr-syslogs
-	end
-
-	function lsupd
-		echo "* Official updates *"
-		checkupdates
-
-		echo -e "\n* AUR Updates *"
-		yay -Qua
-	end
-
-	# Create a backup of the given file
-	function bakfile --argument filename
-		sudo cp $filename $filename.bak
-	end
-
-	# Copy file
-	function cp-file
-		set count (count $argv | tr -d \n)
-		if test "$count" = 2; and test -d "$argv[1]"
-			set from (echo $argv[1] | trim-right /)
-			set to (echo $argv[2])
-			command cp -r $from $to
-		else
-			command cp $argv
-		end
-	end
-
-	function ffmpeg-convert
-		for f in *.$argv[1];
-			set fname (string split -r -m1 . $f)[1]
-			ffmpeg -i "$f" "$fname.$argv[2]"
-		end
-	end
-
-  # Compile mesa-tkg
-  function mk-mesatkg
-    set oldir (pwd)
-    set tkgpath ~/Projects/dev/sh/tkg
-    if test ! -d $tkgpath
-      mkdir -p $tkgpath
-    end
-
-    cd $tkgpath
-
-    if test ! -d $tkgpath/mesa-git
-      git clone "https://github.com/Frogging-Family/mesa-git.git"
-    end
-
-    cd mesa-git
-    git pull
-    makepkg -si
-
-    cd $oldir
-  end
-
-  # Compile linux-tkg kernel
-  function mk-linuxtkg
-    set oldir (pwd)
-    set tkgpath ~/Projects/dev/sh/tkg
-    if test ! -d $tkgpath
-      mkdir -p $tkgpath
-    end
-
-    cd $tkgpath
-
-    if test ! -d $tkgpath/linux-tkg
-      git clone "https://github.com/Frogging-Family/linux-tkg.git"
-    end
-
-    cd linux-tkg
-    git pull
-    makepkg -si
-
-    cd $oldir
-  end
-
-  # Rebuild the hyprland environment
-  function hypr-re
-    set -l hyprpkgs "hyprland-git" "hyprlang-git" "hyprutils-git" "aquamarine-git" "hyprcursor-git" "hyprland-protocols-git" "hyprgraphics-git" "hyprland-qtutils-git" "hypridle-git" "hyprlock-git" "hyprsunset-git"
-    set -l installed []
-
-    for package in $hyprpkgs
-      if [ (pacman -Qi $package) ]
-        set installed $installed $package
-      end
-    end
-
-    if [ (count $installed) -eq 0 ]
-      echo "No packages to rebuild"
-      return 1
-    end
-    
-    yay -S --answerclean All --rebuild (string join " " $installed)
-  end
-
+	zoxide init --cmd cd fish | source
 
 	############# Aliases & Abbreviations ############# 
 
@@ -204,8 +45,7 @@ if status is-interactive
 	abbr ffe 'fastfetch'
 
 	# NOTE: Process and journals
-	abbr psa 'ps auxf'
-	abbr psmem 'ps auxf | sort -nr -k 4'
+  
 	abbr pscpu 'ps auxf | sort -nr -k 3'
 	abbr jctl 'journalctl -p 3 -xb'
 	abbr lsblk 'lsblk -o +uuid,name'
@@ -261,8 +101,6 @@ if status is-interactive
 	abbr gra 'git remote add origin'
 
   # NOTE: QoL
-	# NOTE: Zoxide
-	zoxide init --cmd cd fish | source
 
 	# NOTE: YT-DLP
 	abbr ytdl 'yt-dlp --output "%(title)s.%(ext)s"'
