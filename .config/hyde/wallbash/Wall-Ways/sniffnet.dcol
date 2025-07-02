@@ -1,0 +1,9 @@
+$HOME/.config/sniffnet/wallbash.toml
+
+# all colors are in RGB/RGBA hexadecimal.
+primary = "#<wallbash_pry1>"           # background color
+secondary = "#<wallbash_4xa5>"         # header, footer, and incoming connections color
+outgoing = "#<wallbash_3xa5>"          # outgoing connections color
+text_body = "#<wallbash_txt1>"         # body text color
+text_headers = "#<wallbash_txt4>"      # header and footer text color
+starred = "#<wallbash_3xa8>"           # favorites' star color
