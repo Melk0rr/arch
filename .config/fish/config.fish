@@ -3,6 +3,8 @@
 set -gx EDITOR 'nvim'
 set -gx TERMINAL 'ghostty'
 
+set -g fish_greeting
+
 # Commands to run in interactive sessions can go here
 if status is-interactive
 	# Vim keybindings
@@ -180,9 +182,6 @@ if status is-interactive
     yay -S --answerclean All --rebuild (string join " " $installed)
   end
 
-	# Fish greeting message
-	function fish_greeting
-	end
 
 	############# Aliases & Abbreviations ############# 
 
