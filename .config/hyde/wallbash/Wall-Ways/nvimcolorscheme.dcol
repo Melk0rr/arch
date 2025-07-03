@@ -99,7 +99,10 @@ return {
           colors.bg_sidebar = "#<wallbash_pry1>"
           colors.bg_statusline = "#<wallbash_pry1>"
           colors.bg_visual = "#<wallbash_1xa1>"
-        end
+        end,
+        on_highlights = function (highlights)
+          highlights.LspInlayHint.bg = "#<wallbash_pry1>"
+        end,
       })
     end
   },
