@@ -133,7 +133,6 @@ lua
 luarocks
 neovim
 npm
-pylyzer
 python-pip
 python-pipx
 rust
