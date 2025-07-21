@@ -1,10 +1,11 @@
---- @since 25.2.7
+--- @since 25.5.31
 
 local WINDOWS = ya.target_family() == "windows"
 
 -- The code of supported git status,
 -- also used to determine which status to show for directories when they contain different statuses
 -- see `bubble_up`
+---@enum CODES
 local CODES = {
 	excluded = 100, -- ignored directory
 	ignored = 6, -- ignored file
@@ -26,6 +27,8 @@ local PATTERNS = {
 	{ "[AD][AD]", CODES.updated },
 }
 
+---@param line string
+---@return CODES, string
 local function match(line)
 	local signs = line:sub(1, 2)
 	for _, p in ipairs(PATTERNS) do
@@ -41,9 +44,12 @@ local function match(line)
 		else
 			return code, path
 		end
+		---@diagnostic disable-next-line: missing-return
 	end
 end
 
+---@param cwd Url
+---@return string?
 local function root(cwd)
 	local is_worktree = function(url)
 		local file, head = io.open(tostring(url)), nil
@@ -60,32 +66,38 @@ local function root(cwd)
 		if cha and (cha.is_dir or is_worktree(next)) then
 			return tostring(cwd)
 		end
-		cwd = cwd:parent()
+		cwd = cwd.parent
 	until not cwd
 end
 
+---@param changed Changes
+---@return Changes
 local function bubble_up(changed)
 	local new, empty = {}, Url("")
 	for path, code in pairs(changed) do
 		if code ~= CODES.ignored then
-			local url = Url(path):parent()
+			local url = Url(path).parent
 			while url and url ~= empty do
 				local s = tostring(url)
 				new[s] = (new[s] or CODES.unknown) > code and new[s] or code
-				url = url:parent()
+				url = url.parent
 			end
 		end
 	end
 	return new
 end
 
+---@param excluded string[]
+---@param cwd Url
+---@param repo Url
+---@return Changes
 local function propagate_down(excluded, cwd, repo)
 	local new, rel = {}, cwd:strip_prefix(repo)
 	for _, path in ipairs(excluded) do
 		if rel:starts_with(path) then
 			-- If `cwd` is a subdirectory of an excluded directory, also mark it as `excluded`
 			new[tostring(cwd)] = CODES.excluded
-		elseif cwd == repo:join(path):parent() then
+		elseif cwd == repo:join(path).parent then
 			-- If `path` is a direct subdirectory of `cwd`, mark it as `ignored`
 			new[path] = CODES.ignored
 		else
@@ -95,7 +107,12 @@ local function propagate_down(excluded, cwd, repo)
 	return new
 end
 
+---@param cwd string
+---@param repo string
+---@param changed Changes
 local add = ya.sync(function(st, cwd, repo, changed)
+	---@cast st State
+
 	st.dirs[cwd] = repo
 	st.repos[repo] = st.repos[repo] or {}
 	for path, code in pairs(changed) do
@@ -108,16 +125,29 @@ local add = ya.sync(function(st, cwd, repo, changed)
 			st.repos[repo][path] = code
 		end
 	end
-	ya.render()
+	-- TODO: remove this
+	if ui.render then
+		ui.render()
+	else
+		ya.render()
+	end
 end)
 
+---@param cwd string
 local remove = ya.sync(function(st, cwd)
+	---@cast st State
+
 	local repo = st.dirs[cwd]
 	if not repo then
 		return
 	end
 
-	ya.render()
+	-- TODO: remove this
+	if ui.render then
+		ui.render()
+	else
+		ya.render()
+	end
 	st.dirs[cwd] = nil
 	if not st.repos[repo] then
 		return
@@ -131,35 +161,36 @@ local remove = ya.sync(function(st, cwd)
 	st.repos[repo] = nil
 end)
 
+---@param st State
+---@param opts Options
 local function setup(st, opts)
-	st.dirs = {} -- Mapping between a directory and its corresponding repository
-	st.repos = {} -- Mapping between a repository and the status of each of its files
+	st.dirs = {}
+	st.repos = {}
 
 	opts = opts or {}
 	opts.order = opts.order or 1500
 
-	-- Chosen by ChatGPT fairly, PRs are welcome to adjust them
-	local t = THEME.git or {}
+	local t = th.git or {}
 	local styles = {
-		[CODES.ignored] = t.ignored and ui.Style(t.ignored) or ui.Style():fg("#696969"),
-		[CODES.untracked] = t.untracked and ui.Style(t.untracked) or ui.Style():fg("#a9a9a9"),
-		[CODES.modified] = t.modified and ui.Style(t.modified) or ui.Style():fg("#ffa500"),
-		[CODES.added] = t.added and ui.Style(t.added) or ui.Style():fg("#32cd32"),
-		[CODES.deleted] = t.deleted and ui.Style(t.deleted) or ui.Style():fg("#ff4500"),
-		[CODES.updated] = t.updated and ui.Style(t.updated) or ui.Style():fg("#1e90ff"),
+		[CODES.ignored] = t.ignored and ui.Style(t.ignored) or ui.Style():fg("darkgray"),
+		[CODES.untracked] = t.untracked and ui.Style(t.untracked) or ui.Style():fg("magenta"),
+		[CODES.modified] = t.modified and ui.Style(t.modified) or ui.Style():fg("yellow"),
+		[CODES.added] = t.added and ui.Style(t.added) or ui.Style():fg("green"),
+		[CODES.deleted] = t.deleted and ui.Style(t.deleted) or ui.Style():fg("red"),
+		[CODES.updated] = t.updated and ui.Style(t.updated) or ui.Style():fg("yellow"),
 	}
 	local signs = {
-		[CODES.ignored] = t.ignored_sign or "",
-		[CODES.untracked] = t.untracked_sign or "",
-		[CODES.modified] = t.modified_sign or "",
-		[CODES.added] = t.added_sign or "",
-		[CODES.deleted] = t.deleted_sign or "",
-		[CODES.updated] = t.updated_sign or "U",
+		[CODES.ignored] = t.ignored_sign or "",
+		[CODES.untracked] = t.untracked_sign or "?",
+		[CODES.modified] = t.modified_sign or "",
+		[CODES.added] = t.added_sign or "",
+		[CODES.deleted] = t.deleted_sign or "",
+		[CODES.updated] = t.updated_sign or "",
 	}
 
 	Linemode:children_add(function(self)
 		local url = self._file.url
-		local repo = st.dirs[tostring(url:parent())]
+		local repo = st.dirs[tostring(url.base)]
 		local code
 		if repo then
 			code = repo == CODES.excluded and CODES.ignored or st.repos[repo][tostring(url):sub(#repo + 2)]
@@ -167,7 +198,7 @@ local function setup(st, opts)
 
 		if not code or signs[code] == "" then
 			return ""
-		elseif self._file:is_hovered() then
+		elseif self._file.is_hovered then
 			return ui.Line { " ", signs[code] }
 		else
 			return ui.Line { " ", ui.Span(signs[code]):style(styles[code]) }
@@ -175,8 +206,9 @@ local function setup(st, opts)
 	end, opts.order)
 end
 
+---@type UnstableFetcher
 local function fetch(_, job)
-	local cwd = job.files[1].url:parent()
+	local cwd = job.files[1].url.base
 	local repo = root(cwd)
 	if not repo then
 		remove(tostring(cwd))
@@ -191,8 +223,8 @@ local function fetch(_, job)
 	-- stylua: ignore
 	local output, err = Command("git")
 		:cwd(tostring(cwd))
-		:args({ "--no-optional-locks", "-c", "core.quotePath=", "status", "--porcelain", "-unormal", "--no-renames", "--ignored=matching" })
-		:args(paths)
+		:arg({ "--no-optional-locks", "-c", "core.quotePath=", "status", "--porcelain", "-unormal", "--no-renames", "--ignored=matching" })
+		:arg(paths)
 		:stdout(Command.PIPED)
 		:output()
 	if not output then
