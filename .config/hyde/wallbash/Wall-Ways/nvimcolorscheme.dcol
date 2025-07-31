@@ -1,4 +1,4 @@
-$HOME/.config/nvim/lua/user/plugins/colorschemes.lua|
+$HOME/.config/nvim/lua/plugins/colorschemes.lua|
 return {
   -- INFO: Catppuccin
   {
