@@ -126,6 +126,7 @@ winetricks
 
 # --------------------------------------------------- // Dev
 appflowy-bin
+binsider
 busted
 clang
 go
@@ -133,6 +134,7 @@ lua
 luarocks
 neovim
 npm
+pahole
 python-pip
 python-pipx
 rust
