@@ -1,5 +1,5 @@
 # Print the available updates
-function pacupdates
+function pacupd
   echo "* Official updates *"
   checkupdates
 
