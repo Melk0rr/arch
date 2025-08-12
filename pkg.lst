@@ -141,6 +141,7 @@ rust
 rust-analyzer
 valgrind
 vim
+vulture
 
 # --------------------------------------------------- // Applications
 apparmor
