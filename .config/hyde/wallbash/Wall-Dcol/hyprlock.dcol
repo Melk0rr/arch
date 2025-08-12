@@ -7,7 +7,6 @@ $HOME/.config/hypr/hyprlock.conf
 # GENERAL
 general {
     no_fade_in = false
-    grace = 3
     disable_loading_bar = false
 }
 
