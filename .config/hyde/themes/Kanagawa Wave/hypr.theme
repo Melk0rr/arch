@@ -1,12 +1,7 @@
 $HOME/.config/hypr/themes/theme.conf|> $HOME/.config/hypr/themes/colors.conf
-
-$GTK_THEME = Abyssal-Wave
-$ICON_THEME = Papirus-kanagawa
-$COLOR_SCHEME=prefer-dark
-
-exec = gsettings set org.gnome.desktop.interface icon-theme '$ICON_THEME'
-exec = gsettings set org.gnome.desktop.interface gtk-theme '$GTK_THEME'
-exec = gsettings set org.gnome.desktop.interface color-scheme '$COLOR_SCHEME'
+exec = gsettings set org.gnome.desktop.interface icon-theme 'Papirus-kanagawa'
+exec = gsettings set org.gnome.desktop.interface gtk-theme 'Kanagawa-Wave'
+exec = gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 general {
     border_size = 3
