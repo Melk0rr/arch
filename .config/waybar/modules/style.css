@@ -168,7 +168,7 @@ ${modules_ls}
     color: @wb-act-fg;
 }
 
-#custom-launcher, #mediagroup, #soundgroup, #cpugroup, #custom-hyprsunset {
+#custom-launcher, #mpris, #soundgroup, #cpugroup, #custom-hyprsunset {
     border-radius: ${x2rb_radius}px;
     margin-right: 4px;
     margin-left: 4px;
@@ -185,15 +185,15 @@ ${modules_ls}
     background-color: @alt-fg;
 }
 
-#mediagroup *, #soundgroup *, #cpugroup * {
+#mpris *, #soundgroup *, #cpugroup * {
     background: transparent;
 }
 
-#mediagroup {
+#mpris {
     background: linear-gradient(30deg, @main-bg 30%, @wb-act-bg);
 }
 
-#mediagroup * {
+#mpris * {
     color: @wb-act-fg;
 }
 
@@ -215,4 +215,8 @@ ${modules_ls}
 
 #custom-hyprsunset {
     background: linear-gradient(55deg, @fourth-bg 40%, @main-bg);
+}
+
+#taskbar.empty {
+  background: transparent;
 }
