@@ -1,15 +1,15 @@
 $HOME/.config/OpenRGB/colors.conf|${scrDir}/openrgb.sh g
-@color1:<wallbash_1xa5>
-@color2:<wallbash_2xa5>
-@color3:<wallbash_3xa5>
-@color4:<wallbash_4xa5>
+@color1:<wallbash_pry1>
+@color2:<wallbash_2xa4>
+@color3:<wallbash_3xa4>
+@color4:<wallbash_4xa4>
 # 0: Corsair Vengeance Pro RGB
-<wallbash_1xa5>
+<wallbash_pry1>
 # 1: Corsair Vengeance Pro RGB
-<wallbash_4xa5>
+<wallbash_4xa4>
 # 2: NZXT Kraken 2024 ELITE Series RGB
-<wallbash_1xa5>
+<wallbash_pry1>
 # 3: ASUS ROG CROSSHAIR VIII HERO
-<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_1xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_4xa5>,<wallbash_1xa5>
+<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_pry1>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_4xa4>,<wallbash_pry1>
 # 4: G903 LIGHTSPEED Wireless Gaming Mouse w/ HERO
-<wallbash_4xa5>
+<wallbash_4xa4>
